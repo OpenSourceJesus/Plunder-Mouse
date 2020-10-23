@@ -55,6 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -79,6 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6236730147869535666
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,6 +236,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -258,6 +261,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &6277764317183772118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,7 +286,7 @@ MonoBehaviour:
   attackRate: 0
   attackTimer: 0
   switchIndicatorTrigger: {fileID: 6277373375124168346}
-  switchIndicator: {fileID: 0}
+  switchIndicator: {fileID: 8897033046843732033}
   canSwitch: 0
   weapon: {fileID: 5298328386253594665}
   positionOffsetFromShip: {x: 0, y: 0, z: 0}
@@ -528,6 +532,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OVRCameraRig
       objectReference: {fileID: 0}
+    - target: {fileID: 8752713593084743269, guid: 422e3fefc889f2f48a49d02efd7118b5,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 422e3fefc889f2f48a49d02efd7118b5, type: 3}
 --- !u!4 &5389495447428229118 stripped
@@ -554,6 +563,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8897033046843732033 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8897033047237771513, guid: 422e3fefc889f2f48a49d02efd7118b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 395112632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1136019968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -664,12 +679,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7782b00599aa9504196674d9d3b541b9, type: 3}
---- !u!4 &5214859611546043919 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4926181687081917386, guid: 7782b00599aa9504196674d9d3b541b9,
-    type: 3}
-  m_PrefabInstance: {fileID: 865736811764686277}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5298328386253594665 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5009347021953646060, guid: 7782b00599aa9504196674d9d3b541b9,
@@ -682,6 +691,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddba3a53eefc4de4799107e624d96729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5214859611546043919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4926181687081917386, guid: 7782b00599aa9504196674d9d3b541b9,
+    type: 3}
+  m_PrefabInstance: {fileID: 865736811764686277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4515451636335407845
 PrefabInstance:
   m_ObjectHideFlags: 0

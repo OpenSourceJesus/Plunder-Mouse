@@ -83,6 +83,7 @@ MonoBehaviour:
   trs: {fileID: 4732350537400288}
   rigid: {fileID: 54056211643224928}
   moveSpeed: 60
+  hp: 0
   maxHp: 5
   hpText: {fileID: 344813271871159312}
   dead: 0
@@ -91,10 +92,9 @@ MonoBehaviour:
   attackRate: 0
   attackTimer: 0
   switchIndicatorTrigger: {fileID: 114509222495975582}
-  switchIndicator: {fileID: 0}
+  switchIndicator: {fileID: 3576853923209875317}
   canSwitch: 0
   weapon: {fileID: 0}
-  minTriggerInputValueToAttack: 0.2
 --- !u!54 &54056211643224928
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -412,3 +412,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3576853923209875317 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8897253425193862587, guid: 422e3fefc889f2f48a49d02efd7118b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 5393884537064114894}
+  m_PrefabAsset: {fileID: 0}

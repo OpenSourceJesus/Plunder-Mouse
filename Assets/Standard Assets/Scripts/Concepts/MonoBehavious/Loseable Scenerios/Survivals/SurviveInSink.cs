@@ -6,18 +6,18 @@ namespace PlunderMouse
 {
 	public class SurviveInSink : Survival
 	{
-		public int surviveTimeToWin;
+		// public int surviveTimeToWin;
 
 		public override void Lose ()
 		{
 			if ((int) score > Highscore)
 				Highscore = (int) score;
-			if (score >= surviveTimeToWin)
-			{
-				SceneManager.sceneLoaded += OnSceneLoaded;
-				GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition ("Cinematic");
-			}
-			else
+			// if (score >= surviveTimeToWin)
+			// {
+			// 	SceneManager.sceneLoaded += OnSceneLoaded;
+			// 	GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition ("Cinematic");
+			// }
+			// else
 				GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition("Game Over");
 		}
 

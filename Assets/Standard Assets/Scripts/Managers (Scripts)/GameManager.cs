@@ -5,6 +5,7 @@ using System;
 using PlunderMouse;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
+using UnityEngine.InputSystem;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
@@ -66,6 +67,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 			updatable.DoUpdate ();
 		if (GetSingleton<ObjectPool>() != null && GetSingleton<ObjectPool>().enabled)
 			GetSingleton<ObjectPool>().DoUpdate ();
+		InputSystem.Update ();
 		framesSinceLevelLoaded ++;
 	}
 

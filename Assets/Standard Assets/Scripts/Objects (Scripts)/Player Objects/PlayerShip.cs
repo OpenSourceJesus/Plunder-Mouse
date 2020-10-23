@@ -31,7 +31,14 @@ public class PlayerShip : PlayerObject
 	public virtual void HandleAttacking ()
 	{
 		weapon.trs.parent.rotation = OVRCameraRig.CurrentHand.rotation;
-		if (InputManager.leftTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress || InputManager.rightTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress)
+		if (InputManager._InputDevice == InputManager.InputDevice.KeyboardAndMouse)
+		{
+			if (InputManager.LeftClickInput)
+			{
+				Attack ();
+			}
+		}
+		else if (InputManager.leftTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress || InputManager.rightTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress)
 			Attack ();
 	}
 	
