@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using FastMemberCore;
+using FastMember;
 using System.Reflection;
 
 public static class ReflectionUtilities

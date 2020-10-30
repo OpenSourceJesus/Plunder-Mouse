@@ -72,6 +72,7 @@ MonoBehaviour:
   rigid: {fileID: 54574671550306230}
   moveSpeed: 20
   shooter: {fileID: 0}
+  collider: {fileID: 3985956244755637511}
 --- !u!114 &3983016114071422111
 MonoBehaviour:
   m_ObjectHideFlags: 0

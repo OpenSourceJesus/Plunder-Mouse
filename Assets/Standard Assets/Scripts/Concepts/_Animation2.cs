@@ -91,7 +91,7 @@ namespace PlunderMouse
 		{
 			Once,
 			Loop,
-			PingPong,
+			PingPong
 		}
 	}
 }

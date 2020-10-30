@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Extensions;
-using FastMemberCore;
 using System.Reflection;
 
 namespace PlunderMouse
@@ -101,7 +100,7 @@ namespace PlunderMouse
 			awakenRangeSqr *= awakenRangeSqr;
 			interestRangeSqr = interestRange * interestRange;
 			if (anim2 != null)
-				anim2.Play ("Attack");
+				anim2.Play (attackAnimName);
 		}
 		
 		public virtual void OnEnable ()

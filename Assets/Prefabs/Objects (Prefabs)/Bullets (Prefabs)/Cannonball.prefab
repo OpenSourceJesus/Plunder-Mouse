@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 114230497766090864}
   - component: {fileID: 854101523862662939}
   m_Layer: 10
-  m_Name: Enemy Bullet
+  m_Name: Cannonball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,14 +65,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c63924321732d24f91524bf8bf8e919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trs: {fileID: 4639504707362780}
+  prefabIndex: 0
   damage: 1
   destroyOnContact: 1
+  dead: 0
   range: 150
-  prefabIndex: 0
-  trs: {fileID: 4639504707362780}
   rigid: {fileID: 54574671550306230}
   moveSpeed: 25
   shooter: {fileID: 0}
+  collider: {fileID: 854101523862662939}
 --- !u!114 &114908368095489528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +111,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -133,6 +136,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &114230497766090864
 MonoBehaviour:
   m_ObjectHideFlags: 0

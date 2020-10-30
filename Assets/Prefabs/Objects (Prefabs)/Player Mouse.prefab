@@ -295,7 +295,7 @@ MonoBehaviour:
   jumpDuration: 0.3
   gravity: 40
   multiplyRigidMoveSpeed: 0.5
-  maxHitNormalAngleToJumpOnBulletWithImpunity: 60
+  maxHitNormalAngleToJumpOnBulletWithImpunity: 0
 --- !u!54 &6218027504058070916
 Rigidbody:
   m_ObjectHideFlags: 0
