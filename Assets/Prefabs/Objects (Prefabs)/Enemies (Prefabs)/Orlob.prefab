@@ -453,6 +453,7 @@ MonoBehaviour:
   hp: 0
   maxHp: 50
   anim: {fileID: 258138374}
+  anim2: {fileID: 0}
   dead: 0
   colliders:
   - {fileID: 258138371}
@@ -598,7 +599,7 @@ CharacterController:
   m_Height: 4.8
   m_Radius: 1
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 2.4, z: 0}
@@ -705,6 +706,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -729,6 +731,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &258138371
 MeshCollider:
   m_ObjectHideFlags: 0

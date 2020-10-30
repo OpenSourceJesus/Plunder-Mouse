@@ -91,7 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 435860282512170707}
   m_Layer: 0
-  m_Name: Shoot Spawn (6)
+  m_Name: Shoot Spawn (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2409210584944665890}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &621888423359610147
 GameObject:
@@ -516,75 +516,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5465225335321988207}
-  - {fileID: 4097554244829125447}
-  - {fileID: 859189995786803405}
-  - {fileID: 7644648223450461681}
-  - {fileID: 375152327847217191}
   - {fileID: 7001893927248046815}
   - {fileID: 435860282512170707}
   m_Father: {fileID: 6800362634685329491}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4525599959922039411
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 859189995786803405}
-  m_Layer: 0
-  m_Name: Shoot Spawn (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &859189995786803405
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4525599959922039411}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2409210584944665890}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
---- !u!1 &4720003811089621938
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4097554244829125447}
-  m_Layer: 0
-  m_Name: Shoot Spawn (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4097554244829125447
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4720003811089621938}
-  m_LocalRotation: {x: -0, y: 0.38268352, z: -0, w: 0.9238795}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2409210584944665890}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 45.000004, z: 0}
 --- !u!1 &4826322643484163948
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7001893927248046815}
   m_Layer: 0
-  m_Name: Shoot Spawn (5)
+  m_Name: Shoot Spawn (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -676,7 +612,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2409210584944665890}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!1 &6800362634685557875
 GameObject:
@@ -816,26 +752,6 @@ MonoBehaviour:
       type: 3}
     spawner: {fileID: 5465225335321988207}
   - bulletPattern: {fileID: 11400000, guid: 14ee3034abdca7e44be5d38a176c440c, type: 2}
-    attackOnAnimationFrameIndex: -1
-    bulletPrefab: {fileID: 114688729189032340, guid: f1eb814406d8f73449d50065ac35df5c,
-      type: 3}
-    spawner: {fileID: 4097554244829125447}
-  - bulletPattern: {fileID: 11400000, guid: 14ee3034abdca7e44be5d38a176c440c, type: 2}
-    attackOnAnimationFrameIndex: -1
-    bulletPrefab: {fileID: 114688729189032340, guid: f1eb814406d8f73449d50065ac35df5c,
-      type: 3}
-    spawner: {fileID: 859189995786803405}
-  - bulletPattern: {fileID: 11400000, guid: 14ee3034abdca7e44be5d38a176c440c, type: 2}
-    attackOnAnimationFrameIndex: -1
-    bulletPrefab: {fileID: 114688729189032340, guid: f1eb814406d8f73449d50065ac35df5c,
-      type: 3}
-    spawner: {fileID: 7644648223450461681}
-  - bulletPattern: {fileID: 11400000, guid: 14ee3034abdca7e44be5d38a176c440c, type: 2}
-    attackOnAnimationFrameIndex: -1
-    bulletPrefab: {fileID: 114688729189032340, guid: f1eb814406d8f73449d50065ac35df5c,
-      type: 3}
-    spawner: {fileID: 375152327847217191}
-  - bulletPattern: {fileID: 11400000, guid: 14ee3034abdca7e44be5d38a176c440c, type: 2}
     attackOnAnimationFrameIndex: 0
     bulletPrefab: {fileID: 114688729189032340, guid: f1eb814406d8f73449d50065ac35df5c,
       type: 3}
@@ -900,7 +816,7 @@ CharacterController:
   m_Height: 3
   m_Radius: 1.2
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.1
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0.35, y: 0.02, z: 0.8}
@@ -1089,36 +1005,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &7194568779899630989
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 375152327847217191}
-  m_Layer: 0
-  m_Name: Shoot Spawn (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &375152327847217191
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7194568779899630989}
-  m_LocalRotation: {x: -0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2409210584944665890}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: -45, y: 0, z: 0}
 --- !u!1 &7235269938738680580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,36 +1040,6 @@ Transform:
   m_Father: {fileID: 6800362634685329491}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -3, z: 0}
---- !u!1 &8230848514766596715
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7644648223450461681}
-  m_Layer: 0
-  m_Name: Shoot Spawn (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7644648223450461681
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8230848514766596715}
-  m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2409210584944665890}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
 --- !u!1 &8358625760938915880
 GameObject:
   m_ObjectHideFlags: 0

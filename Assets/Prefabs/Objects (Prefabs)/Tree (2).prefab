@@ -9,10 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4036948345936966}
-  - component: {fileID: 114490648741182440}
-  - component: {fileID: 23709890681290360}
-  - component: {fileID: 33617741779599272}
-  - component: {fileID: 987967807975260091}
+  - component: {fileID: 492216349310450104}
+  - component: {fileID: 4837477591868567160}
+  - component: {fileID: 4893842326759984726}
+  - component: {fileID: 2644361440035339270}
+  - component: {fileID: -1181893940400624591}
+  - component: {fileID: 3680851852256723954}
+  - component: {fileID: -3179315732909890825}
   m_Layer: 12
   m_Name: Tree (2)
   m_TagString: Untagged
@@ -27,14 +30,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537813220378810}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.11926987, w: 0.99286187}
+  m_LocalPosition: {x: 0, y: -762.98584, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114490648741182440
+--- !u!114 &492216349310450104
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,11 +58,11 @@ MonoBehaviour:
   frontMaterial: {fileID: 0}
   meshHeight: 1.5346667
   meshWidth: 2.7306666
-  meshDepth: 0.25
-  pivotHeightOffset: 0
-  pivotWidthOffset: 0
+  meshDepth: 0.5
+  pivotHeightOffset: -0.6
+  pivotWidthOffset: 0.15
   pivotDepthOffset: 0
-  lastPivotOffset: {x: 0, y: 0, z: 0}
+  lastPivotOffset: {x: 0.15, y: -0.6, z: 0}
   generateCollider: 1
   usePrimitiveCollider: 0
   useAABBCollider: 0
@@ -71,7 +74,7 @@ MonoBehaviour:
   idNumber: 88d279cb75392206
   mergeClosePoints: 0
   mergeDistance: 0
---- !u!23 &23709890681290360
+--- !u!23 &4837477591868567160
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,6 +89,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -110,7 +114,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33617741779599272
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &4893842326759984726
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +123,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537813220378810}
   m_Mesh: {fileID: 4300000, guid: feeff2b5ab297d74d815da9fdfc1ec05, type: 2}
---- !u!205 &987967807975260091
+--- !u!64 &2644361440035339270
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537813220378810}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: -1
+  m_Mesh: {fileID: 4300000, guid: feeff2b5ab297d74d815da9fdfc1ec05, type: 2}
+--- !u!205 &-1181893940400624591
 LODGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,8 +151,38 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0
+  - screenRelativeHeight: 0.049624998
     fadeTransitionWidth: 0
     renderers:
-    - renderer: {fileID: 23709890681290360}
+    - renderer: {fileID: 4837477591868567160}
+  m_Enabled: 0
+--- !u!114 &3680851852256723954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537813220378810}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a88a5b30eb40843ae56fee6bcbe738, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useLocalPosition: 0
+  trs: {fileID: 4036948345936966}
+  snapTo: {x: 1, y: 0, z: 1}
+  offset: {x: 0, y: 0, z: 0}
+--- !u!114 &-3179315732909890825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537813220378810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6365ab97d4b89d04dab945eb2cc85957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trs: {fileID: 4036948345936966}
+  autoSetRotation: 0

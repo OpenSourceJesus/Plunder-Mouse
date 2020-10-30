@@ -67,10 +67,7 @@ public class FloatingPhysics : MonoBehaviour, IUpdatable
         }
     }
 
-
-
-    //The buoyancy force so the boat can float
-    private Vector3 BuoyancyForce (FloatingTriangleData triangleData)
+    Vector3 BuoyancyForce (FloatingTriangleData triangleData)
     {
         //Buoyancy is a hydrostatic force - it's there even if the water isn't flowing or if the boat stays still
 
