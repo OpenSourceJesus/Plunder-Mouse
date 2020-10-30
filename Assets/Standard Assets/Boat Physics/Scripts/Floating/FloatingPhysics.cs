@@ -6,76 +6,37 @@ using Extensions;
 //Simples possible script to make a mesh float
 public class FloatingPhysics : MonoBehaviour, IUpdatable
 {
-    //Drags
-    //The object that's floating
     public GameObject floatingObj;
-    //The debug to this gameobject, which will display the mesh that underwater
     public GameObject underWaterObj;
-
-    //Script that's doing everything needed with the boat mesh, such as finding out which part is above the water
     private ModifyFloatingMesh modifyFloatingMesh;
-
-    //Mesh for debugging to see which part of the original mesh is below the water
     private Mesh underWaterMesh;
+    public Rigidbody rigid;
 
-    //The objects rigidbody
-    private Rigidbody objectRb;
-
-
-
-    void Start()
+    void OnEnable ()
     {
-        //Get the object's rigidbody
-        objectRb = gameObject.GetComponent<Rigidbody>();
-
-        //If theres no special floating object, then that means the mesh is attached to this game object
-        if (floatingObj == null)
-        {
-            floatingObj = gameObject;
-        }
-
         //Init the script that will modify the mesh
         modifyFloatingMesh = new ModifyFloatingMesh(floatingObj);
-
-        //Meshes that are below and above the water
-        if (underWaterObj != null)
-        {
-            underWaterMesh = underWaterObj.GetComponent<MeshFilter>().mesh;
-        }
         GameManager.updatables = GameManager.updatables.Add(this);
     }
 
-    public virtual void OnDestroy ()
+    void OnDisable ()
     {
         GameManager.updatables = GameManager.updatables.Remove(this);
     }
 
-    public virtual void DoUpdate ()
+    public void DoUpdate ()
     {
-        //Generate the under water mesh
         modifyFloatingMesh.GenerateUnderwaterMesh();
-
+        if (modifyFloatingMesh.underWaterTriangleData.Count > 0)
+        {
+            AddUnderWaterForces();
+        }
         //Display the under water mesh - will take some computer power so remove in final version
         // if (underWaterMesh != null)
         // {
             //modifyFloatingMesh.DisplayMesh(underWaterMesh, "UnderWater Mesh", modifyFloatingMesh.underWaterTriangleData);
         // }
     }
-
-
-
-    public virtual void FixedUpdate ()
-    {
-        // if (Time.frameCount <= 2)
-        //     return;
-        //Add forces to the part of the object that's below the water
-        if (modifyFloatingMesh.underWaterTriangleData.Count > 0)
-        {
-            AddUnderWaterForces();
-        }
-    }
-
-
 
     //Add all forces that act on the triangles below the water
     void AddUnderWaterForces()
@@ -93,7 +54,7 @@ public class FloatingPhysics : MonoBehaviour, IUpdatable
             Vector3 buoyancyForce = BuoyancyForce(triangleData);
 
             //Add the force to the boat
-            objectRb.AddForceAtPosition(buoyancyForce, triangleData.center);
+            rigid.AddForceAtPosition(buoyancyForce, triangleData.center);
 
 
             //Debug
@@ -109,7 +70,7 @@ public class FloatingPhysics : MonoBehaviour, IUpdatable
 
 
     //The buoyancy force so the boat can float
-    private Vector3 BuoyancyForce(FloatingTriangleData triangleData)
+    private Vector3 BuoyancyForce (FloatingTriangleData triangleData)
     {
         //Buoyancy is a hydrostatic force - it's there even if the water isn't flowing or if the boat stays still
 
@@ -120,7 +81,7 @@ public class FloatingPhysics : MonoBehaviour, IUpdatable
 
         //The density of the water
         float rhoWater = 1027f;
-        float gravity = -9.81f;
+        float gravity = Physics.gravity.y;
 
         // V = z * S * n 
         // z - distance to surface
