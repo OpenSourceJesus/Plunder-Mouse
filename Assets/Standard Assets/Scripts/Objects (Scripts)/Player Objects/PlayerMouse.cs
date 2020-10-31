@@ -143,18 +143,12 @@ namespace PlunderMouse
 			}
 		}
 
-		public override void TakeDamage (float amount, Hazard source)
-		{
-			if (!(source is Bullet))
-				base.TakeDamage (amount, source);
-		}
-
 		public virtual void OnCollisionEnter (Collision coll)
 		{
 			Bullet hitBullet = coll.gameObject.GetComponent<Bullet>();
 			if (hitBullet != null && (Vector3.Angle(coll.GetContact(0).normal, Vector3.up) > maxHitNormalAngleToJumpOnBulletWithImpunity || !(Keyboard.current.leftShiftKey.isPressed || InputManager.leftTouchController.primaryButton.isPressed || InputManager.leftTouchController.secondaryButton.isPressed || InputManager.rightTouchController.primaryButton.isPressed || InputManager.rightTouchController.secondaryButton.isPressed)))
 			{
-				base.TakeDamage (hitBullet.damage, hitBullet);
+				TakeDamage (hitBullet.damage, hitBullet);
 				Destroy(hitBullet.gameObject);
 			}
 			HandleSlopes ();
