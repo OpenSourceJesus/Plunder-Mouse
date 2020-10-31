@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using Extensions;
 using UnityEngine.InputSystem;
 
@@ -15,15 +11,17 @@ namespace PlunderMouse
 		public CharacterController controller;
 		public float jumpSpeed;
 		public float jumpDuration;
-		float timeLastGrounded;
 		public float gravity;
+		public float maxHitNormalAngleToJumpOnBulletWithImpunity;
+		public float multiplyRigidMoveSpeed;
+		public float groundCheckDistance;
+		float timeLastGrounded;
 		float yVel;
 		Vector3 previousPosition;
-		public float multiplyRigidMoveSpeed;
 		// public bool isSwimming;
 		Quaternion previousRotation;
 		bool canJump;
-		public float maxHitNormalAngleToJumpOnBulletWithImpunity;
+		public LayerMask whatICollideWith;
 		
 		public override void Start ()
 		{
@@ -159,6 +157,12 @@ namespace PlunderMouse
 				base.TakeDamage (hitBullet.damage, hitBullet);
 				Destroy(hitBullet.gameObject);
 			}
+			HandleSlopes ();
+		}
+
+		void OnCollisionStay (Collision coll)
+		{
+			HandleSlopes ();
 		}
 		
 		public virtual void BoardShip ()
@@ -181,6 +185,30 @@ namespace PlunderMouse
 			Active = true;
 			switchIndicatorTrigger.gameObject.SetActive(true);
 			trs.SetParent(null);
+		}
+
+		void HandleSlopes ()
+		{
+			RaycastHit hit;
+			if (Physics.Raycast(controller.bounds.center + Vector3.down * controller.bounds.extents.y, Vector3.down, out hit, groundCheckDistance, whatICollideWith))
+			{
+				float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
+				if (slopeAngle <= controller.slopeLimit)
+				{
+					controller.enabled = true;
+					rigid.useGravity = false;
+					rigid.velocity = Vector2.zero;
+					return;
+				}
+				// else
+				// 	return;
+			}
+			else
+				return;
+			if (controller.enabled)
+				rigid.velocity = controller.velocity;
+			controller.enabled = false;
+			rigid.useGravity = true;
 		}
 	}
 }

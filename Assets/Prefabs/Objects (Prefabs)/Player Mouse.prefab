@@ -294,8 +294,12 @@ MonoBehaviour:
   jumpSpeed: 75
   jumpDuration: 0.3
   gravity: 40
-  multiplyRigidMoveSpeed: 0.5
   maxHitNormalAngleToJumpOnBulletWithImpunity: 0
+  multiplyRigidMoveSpeed: 0.5
+  groundCheckDistance: Infinity
+  whatICollideWith:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!54 &6218027504058070916
 Rigidbody:
   m_ObjectHideFlags: 0
