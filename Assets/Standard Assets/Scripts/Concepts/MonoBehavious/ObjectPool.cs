@@ -20,6 +20,7 @@ namespace PlunderMouse
 		
 		public virtual void Awake ()
 		{
+			instance = this;
 			enabled = false;
 			gameObject.SetActive(false);
 			if (!preloadOnAwake)

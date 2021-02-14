@@ -43,5 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d3db2a43f43bf94487e6d0f22e7f459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  handleMultipleInstances: 0
+  persistant: 0
   inputDevice: 1
-  settings: {fileID: 11400000, guid: e471214699e95e445b1ac9ec040c931b, type: 2}
+  settings: {fileID: 11400000, guid: ca6a56d4545555a4ea06278a1b6796c3, type: 2}
