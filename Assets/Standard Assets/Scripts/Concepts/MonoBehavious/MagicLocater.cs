@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Extensions;
+using GameDevJourney;
 
 namespace PlunderMouse
 {
-	public class MagicLocater : MonoBehaviour
+	public class MagicLocater : SingletonMonoBehaviour<MagicLocater>
 	{
 		public bool PauseWhileUnfocused
 		{

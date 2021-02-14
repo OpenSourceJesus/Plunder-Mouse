@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using System;
 using Unity.XR.Oculus.Input;
 
-public class PlayerObject : MonoBehaviour, IDestructable, IUpdatable
+public class PlayerObject : SingletonMonoBehaviour<PlayerObject>, IDestructable, IUpdatable
 {
 	public Transform trs;
 	public Rigidbody rigid;
@@ -92,7 +92,7 @@ public class PlayerObject : MonoBehaviour, IDestructable, IUpdatable
 	
 	public virtual void Death ()
 	{
-		GameManager.GetSingleton<LoseableScenerio>().Lose ();
+		LoseableScenerio.Instance.Lose ();
 	}
 	
 	public virtual void DoUpdate ()
@@ -117,9 +117,9 @@ public class PlayerObject : MonoBehaviour, IDestructable, IUpdatable
 	public virtual Vector3 GetMoveInput ()
 	{
 		Vector3 moveInput = new Vector3();
-		if (GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.KeyboardAndMouse)
+		if (InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse)
 			moveInput = InputManager.GetAxis2D(Keyboard.current.dKey, Keyboard.current.aKey, Keyboard.current.wKey, Keyboard.current.sKey);
-		else if (GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.OculusRift)
+		else if (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift)
 		{
 			InputManager.leftTouchController = (OculusTouchController) OculusTouchController.leftHand;
 			InputManager.rightTouchController = (OculusTouchController) OculusTouchController.rightHand;
@@ -128,7 +128,7 @@ public class PlayerObject : MonoBehaviour, IDestructable, IUpdatable
 		if (moveInput != Vector3.zero)
 			moveInput = moveInput.XYToXZ();
 		moveInput = Vector3.ClampMagnitude(moveInput, 1);
-		moveInput = Quaternion.Euler(Vector3.up * GameManager.GetSingleton<OVRCameraRig>().eyesTrs.eulerAngles.y) * moveInput;
+		moveInput = Quaternion.Euler(Vector3.up * OVRCameraRig.Instance.eyesTrs.eulerAngles.y) * moveInput;
 		moveInput.y = 0;
 		return moveInput;
 	}

@@ -10,9 +10,10 @@ public class TerrainObject : MonoBehaviour
 
 	void OnEnable ()
 	{
+		Terrain terrain = FindObjectOfType<Terrain>();
 		if (autoSetRotation)
-			trs.rotation = Quaternion.LookRotation(Vector3.forward, GameManager.GetSingleton<Terrain>().terrainData.GetInterpolatedNormal(1f / (GameManager.GetSingleton<Terrain>().terrainData.size.x / trs.position.x) + .5f, 1f / (GameManager.GetSingleton<Terrain>().terrainData.size.z / trs.position.z) + .5f));
-		trs.position = trs.position.SetY(GameManager.GetSingleton<Terrain>().GetComponent<Transform>().position.y + GameManager.GetSingleton<Terrain>().terrainData.GetInterpolatedHeight(1f / (GameManager.GetSingleton<Terrain>().terrainData.size.x / trs.position.x) + .5f, 1f / (GameManager.GetSingleton<Terrain>().terrainData.size.z / trs.position.z) + .5f));
+			trs.rotation = Quaternion.LookRotation(Vector3.forward, terrain.terrainData.GetInterpolatedNormal(1f / (terrain.terrainData.size.x / trs.position.x) + .5f, 1f / (terrain.terrainData.size.z / trs.position.z) + .5f));
+		trs.position = trs.position.SetY(terrain.GetComponent<Transform>().position.y + terrain.terrainData.GetInterpolatedHeight(1f / (terrain.terrainData.size.x / trs.position.x) + .5f, 1f / (terrain.terrainData.size.z / trs.position.z) + .5f));
 	}
 }
 #endif

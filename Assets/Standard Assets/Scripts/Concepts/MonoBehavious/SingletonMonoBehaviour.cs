@@ -24,7 +24,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 		if (!Application.isPlaying)
 			return;
 #endif
-		if (handleMultipleInstances != MultipleInstancesHandlingType.KeepAll && GameManager.GetSingleton<T>() != null && GameManager.GetSingleton<T>() != this)
+		if (handleMultipleInstances != MultipleInstancesHandlingType.KeepAll && Instance != this)
 		{
 			if (handleMultipleInstances == MultipleInstancesHandlingType.DestroyNew)
 			{
@@ -32,7 +32,7 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 				return;
 			}
 			else
-				Destroy(GameManager.GetSingleton<T>().gameObject);
+				Destroy(instance.gameObject);
 		}
 		if (persistant)
 			DontDestroyOnLoad(gameObject);

@@ -24,7 +24,7 @@ public class Quest : UnlockableNode
 			completionCount = value;
 			if (value >= minCompletionCount && value <= maxCompletionCount)
 			{
-				// GameManager.GetSingleton<ObjectiveGuider>().gameObject.SetActive(false);
+				// ObjectiveGuider.Instance.gameObject.SetActive(false);
 				Traverse ();
 				QuestManager.currentQuests.Remove(this);
 			}

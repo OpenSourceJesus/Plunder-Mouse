@@ -2,13 +2,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PlunderMouse;
 using Extensions;
 using UnityEngine.InputSystem;
 using Unity.XR.Oculus.Input;
+using GameDevJourney;
+using PlunderMouse;
 
-public class OVRCameraRig : MonoBehaviour, IUpdatable
+public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 {
+	public bool PauseWhileUnfocused
+	{
+		get
+		{
+			return true;
+		}
+	}
 	public new Camera camera;
 	public Transform trackingSpaceTrs;
 	public Transform eyesTrs;
@@ -33,7 +41,7 @@ public class OVRCameraRig : MonoBehaviour, IUpdatable
 	public float lookRate;
 	bool wasPreviouslySettingOrienation;
 	
-	public virtual void Start ()
+	void Start ()
 	{
 		CurrentHand = rightHandTrs;
 		positionOffset = trs.localPosition;
@@ -42,7 +50,7 @@ public class OVRCameraRig : MonoBehaviour, IUpdatable
 		GameManager.updatables = GameManager.updatables.Add(this);
 	}
 
-	public virtual void DoUpdate ()
+	public void DoUpdate ()
 	{
 		if (PlayerObject.CurrentActive != null)
 			trs.position = PlayerObject.CurrentActive.trs.position + (rota * positionOffset);
@@ -52,9 +60,9 @@ public class OVRCameraRig : MonoBehaviour, IUpdatable
 			trackingSpaceTrs.RotateAround(trackingSpaceTrs.position, trackingSpaceTrs.right, rotaInput.y);
 			trackingSpaceTrs.RotateAround(trackingSpaceTrs.position, Vector3.up, rotaInput.x);
 		}
-		if (GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.OculusRift)
+		if (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift)
 			UpdateAnchors ();
-		if ((GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.KeyboardAndMouse && Keyboard.current.spaceKey.isPressed) || (GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.OculusRift && (InputManager.leftTouchController.gripPressed.isPressed || InputManager.rightTouchController.gripPressed.isPressed)))
+		if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Keyboard.current.spaceKey.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && (InputManager.leftTouchController.gripPressed.isPressed || InputManager.rightTouchController.gripPressed.isPressed)))
 		{
 			if (!wasPreviouslySettingOrienation)
 			{
@@ -66,7 +74,12 @@ public class OVRCameraRig : MonoBehaviour, IUpdatable
 			wasPreviouslySettingOrienation = false;
 	}
 
-	public virtual void UpdateAnchors ()
+	void OnDestroy ()
+	{
+		GameManager.updatables = GameManager.updatables.Remove(this);
+	}
+
+	void UpdateAnchors ()
 	{
 		InputManager.hmd = InputSystem.GetDevice<OculusHMD>();
 		eyesTrs.localPosition = InputManager.hmd.devicePosition.ToVec3();
@@ -79,14 +92,9 @@ public class OVRCameraRig : MonoBehaviour, IUpdatable
 		rightHandTrs.localPosition = InputManager.rightTouchController.devicePosition.ToVec3();
 	}
 	
-	public virtual void SetOrientation ()
+	void SetOrientation ()
 	{
 		rota = Quaternion.LookRotation(eyesTrs.forward.GetXZ().SetY(eyesTrs.forward.y), Vector3.up);
 		trackingSpaceTrs.forward = eyesTrs.forward.GetXZ();
-	}
-
-	public virtual void OnDestroy ()
-	{
-		GameManager.updatables = GameManager.updatables.Remove(this);
 	}
 }

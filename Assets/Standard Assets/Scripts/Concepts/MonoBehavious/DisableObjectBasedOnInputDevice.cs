@@ -11,7 +11,7 @@ namespace PlunderMouse
 		
 		public virtual void Start ()
 		{
-			gameObject.SetActive(GameManager.GetSingleton<InputManager>().inputDevice == inputDevice != disableIfUsing);
+			gameObject.SetActive(InputManager.Instance.inputDevice == inputDevice != disableIfUsing);
 		}
 	}
 }

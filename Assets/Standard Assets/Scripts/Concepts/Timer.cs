@@ -33,15 +33,15 @@ public class Timer
 	public virtual void Start ()
 	{
 		if (timerRoutine == null)
-			timerRoutine = GameManager.GetSingleton<GameManager>().StartCoroutine(TimerRoutine ());
+			timerRoutine = GameManager.Instance.StartCoroutine(TimerRoutine ());
 	}
 
 	public virtual void Stop ()
 	{
 		if (timerRoutine != null)
 		{
-			// if (GameManager.GetSingleton<GameManager>() != null)
-				GameManager.GetSingleton<GameManager>().StopCoroutine(timerRoutine);
+			// if (GameManager.Instance != null)
+				GameManager.Instance.StopCoroutine(timerRoutine);
 			timerRoutine = null;
 			runningInstances = runningInstances.Remove(this);
 		}

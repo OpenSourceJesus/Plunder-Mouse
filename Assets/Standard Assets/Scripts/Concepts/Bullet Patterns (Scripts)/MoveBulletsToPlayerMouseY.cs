@@ -15,7 +15,7 @@ namespace PlunderMouse
 			List<Bullet> output = new List<Bullet>();
 			foreach (BulletPattern bulletPattern in bulletPatterns)
 				output.AddRange(bulletPattern.Shoot (spawner, bulletPrefab, positionOffset));
-			GameManager.GetSingleton<GameManager>().StartCoroutine(MoveRoutine (output));
+			GameManager.Instance.StartCoroutine(MoveRoutine (output));
 			return output.ToArray();
 		}
 		
@@ -24,7 +24,7 @@ namespace PlunderMouse
 			List<Bullet> output = new List<Bullet>();
 			foreach (BulletPattern bulletPattern in bulletPatterns)
 				output.AddRange(bulletPattern.Shoot (spawnPos, direction, bulletPrefab, positionOffset));
-			GameManager.GetSingleton<GameManager>().StartCoroutine(MoveRoutine (output));
+			GameManager.Instance.StartCoroutine(MoveRoutine (output));
 			return output.ToArray();
 		}
 
@@ -45,7 +45,7 @@ namespace PlunderMouse
                 for (int i = 0; i < bulletEntries.Count; i++)
 				{
                     BulletEntry bulletEntry = (BulletEntry) bulletEntries[i];
-                    if (MathfExtensions.Sign(GameManager.GetSingleton<PlayerMouse>().trs.position.y - bulletEntry.bullet.trs.position.y) != bulletEntry.yMoveDirection)
+                    if (MathfExtensions.Sign(PlayerMouse.Instance.trs.position.y - bulletEntry.bullet.trs.position.y) != bulletEntry.yMoveDirection)
 					{
 						bulletEntries.RemoveAt(i);
 						i --;
@@ -69,7 +69,7 @@ namespace PlunderMouse
 			return bullet;
 		}
 
-		public class BulletEntry
+		public struct BulletEntry
 		{
 			public Bullet bullet;
 			public int yMoveDirection;
@@ -77,7 +77,7 @@ namespace PlunderMouse
 			public BulletEntry (Bullet bullet)
 			{
 				this.bullet = bullet;
-				yMoveDirection = MathfExtensions.Sign(GameManager.GetSingleton<PlayerMouse>().trs.position.y - bullet.trs.position.y);
+				yMoveDirection = MathfExtensions.Sign(PlayerMouse.Instance.trs.position.y - bullet.trs.position.y);
 			}
 		}
 	}

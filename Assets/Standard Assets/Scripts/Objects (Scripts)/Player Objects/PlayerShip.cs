@@ -7,6 +7,17 @@ using PlunderMouse;
 
 public class PlayerShip : PlayerObject
 {
+	public new static PlayerShip instance;
+	public new static PlayerShip Instance
+	{
+		get
+		{
+			if (instance == null)
+				instance = FindObjectOfType<PlayerShip>();
+			return instance;
+		}
+	}
+	
 	public override void Start ()
 	{
 		base.Start();
@@ -20,12 +31,12 @@ public class PlayerShip : PlayerObject
 		base.DoUpdate ();
 		if (dead || !Active)
 			return;
-		GameManager.GetSingleton<PlayerMouse>().trs.localPosition = GameManager.GetSingleton<PlayerMouse>().positionOffsetFromShip;
+		PlayerMouse.Instance.trs.localPosition = PlayerMouse.Instance.positionOffsetFromShip;
 		HandleAttacking ();
 		// canSwitch = switchIndicatorTrigger.collidersInside.Count > 0;
 		// switchIndicator.SetActive(canSwitch);
 		// if (canSwitch && (OVRInput.GetDown(OVRInput.Button.Three) || InputManager.inputter.GetButtonDown("Interact")))
-		// 	GameManager.GetSingleton<PlayerMouse>().DockShip();
+		// 	PlayerMouse.Instance.DockShip();
 	}
 	
 	public virtual void HandleAttacking ()
@@ -38,7 +49,7 @@ public class PlayerShip : PlayerObject
 				Attack ();
 			}
 		}
-		else if (InputManager.leftTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress || InputManager.rightTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress)
+		else if (InputManager.leftTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress || InputManager.rightTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress)
 			Attack ();
 	}
 	

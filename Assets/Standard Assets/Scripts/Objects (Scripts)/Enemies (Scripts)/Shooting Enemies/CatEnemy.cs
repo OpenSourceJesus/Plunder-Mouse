@@ -33,7 +33,7 @@ namespace PlunderMouse
 			base.Death ();
 			rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 			rigid.useGravity = true;
-			GameManager.GetSingleton<ObjectPool>().RangeDespawn (prefabIndex, gameObject, trs, despawnRangeAfterDeath);
+			ObjectPool.Instance.RangeDespawn (prefabIndex, gameObject, trs, despawnRangeAfterDeath);
 		}
 	}
 }

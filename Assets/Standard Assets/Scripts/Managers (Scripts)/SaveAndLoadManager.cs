@@ -8,7 +8,7 @@ using System;
 using Random = UnityEngine.Random;
 
 [ExecuteInEditMode]
-public class SaveAndLoadManager : MonoBehaviour
+public class SaveAndLoadManager : SingletonMonoBehaviour<SaveAndLoadManager>
 {
 	public static fsSerializer serializer = new fsSerializer();
 	// [HideInInspector]
@@ -79,9 +79,9 @@ public class SaveAndLoadManager : MonoBehaviour
 	
 	public virtual void Save ()
 	{
-		if (GameManager.GetSingleton<SaveAndLoadManager>() != this)
+		if (SaveAndLoadManager.Instance != this)
 		{
-			GameManager.GetSingleton<SaveAndLoadManager>().Save ();
+			SaveAndLoadManager.Instance.Save ();
 			return;
 		}
 		MostRecentlyLoadedSaveEntryIndex ++;
@@ -94,9 +94,9 @@ public class SaveAndLoadManager : MonoBehaviour
 	
 	public virtual void Load (int savedGameIndex)
 	{
-		if (GameManager.GetSingleton<SaveAndLoadManager>() != this)
+		if (SaveAndLoadManager.Instance != this)
 		{
-			GameManager.GetSingleton<SaveAndLoadManager>().Load (savedGameIndex);
+			SaveAndLoadManager.Instance.Load (savedGameIndex);
 			return;
 		}
 		MostRecentlyLoadedSaveEntryIndex = savedGameIndex;

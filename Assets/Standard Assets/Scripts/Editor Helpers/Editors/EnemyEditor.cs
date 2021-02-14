@@ -28,7 +28,10 @@ namespace PlunderMouse
 				return;
 			Enemy enemy = (Enemy) target;
 			if (enemy.rigid.useGravity)
-				enemy.trs.position = enemy.trs.position.SetY(GameManager.GetSingleton<Terrain>().GetComponent<Transform>().position.y + GameManager.GetSingleton<Terrain>().terrainData.GetInterpolatedHeight(1f / (GameManager.GetSingleton<Terrain>().terrainData.size.x / enemy.trs.position.x) + .5f, 1f / (GameManager.GetSingleton<Terrain>().terrainData.size.z / enemy.trs.position.z) + .5f));
+			{
+				Terrain terrain = FindObjectOfType<Terrain>();
+				enemy.trs.position = enemy.trs.position.SetY(terrain.GetComponent<Transform>().position.y + terrain.terrainData.GetInterpolatedHeight(1f / (terrain.terrainData.size.x / enemy.trs.position.x) + .5f, 1f / (terrain.terrainData.size.z / enemy.trs.position.z) + .5f));
+			}
 			enemy.enemyGroup = enemy.GetComponentInParent<EnemyGroup>();
 		}
 	}

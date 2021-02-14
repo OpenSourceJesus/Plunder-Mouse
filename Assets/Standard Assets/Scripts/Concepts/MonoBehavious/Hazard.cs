@@ -24,7 +24,7 @@ namespace PlunderMouse
 				if (prefabIndex == -1)
 					Destroy(gameObject);
 				else
-					// GameManager.GetSingleton<ObjectPool>().Despawn (prefabIndex, gameObject, trs);
+					// ObjectPool.Instance.Despawn (prefabIndex, gameObject, trs);
 					Destroy(gameObject);
 			}
 		}

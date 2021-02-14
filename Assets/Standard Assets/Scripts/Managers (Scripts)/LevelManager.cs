@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using GameDevJourney;
 
-public class LevelManager : MonoBehaviour, ISavableAndLoadable
+public class LevelManager : SingletonMonoBehaviour<LevelManager>, ISavableAndLoadable
 {
 	public static bool isLoading;
 	public float transitionRate;
@@ -19,9 +20,9 @@ public class LevelManager : MonoBehaviour, ISavableAndLoadable
 	
 	public void LoadLevelWithTransition (string levelName)
 	{
-		if (GameManager.GetSingleton<LevelManager>() != this)
+		if (LevelManager.Instance != this)
 		{
-			GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition (levelName);
+			LevelManager.Instance.LoadLevelWithTransition (levelName);
 			return;
 		}
 		isLoading = true;
@@ -38,9 +39,9 @@ public class LevelManager : MonoBehaviour, ISavableAndLoadable
 	
 	public void LoadLevelWithTransition (int levelId)
 	{
-		if (GameManager.GetSingleton<LevelManager>() != this)
+		if (LevelManager.Instance != this)
 		{
-			GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition (levelId);
+			LevelManager.Instance.LoadLevelWithTransition (levelId);
 			return;
 		}
 		isLoading = true;
@@ -57,9 +58,9 @@ public class LevelManager : MonoBehaviour, ISavableAndLoadable
 	
 	public void LoadLevelAdditiveWithTransition (string levelName)
 	{
-		if (GameManager.GetSingleton<LevelManager>() != this)
+		if (LevelManager.Instance != this)
 		{
-			GameManager.GetSingleton<LevelManager>().LoadLevelAdditiveWithTransition (levelName);
+			LevelManager.Instance.LoadLevelAdditiveWithTransition (levelName);
 			return;
 		}
 		isLoading = true;

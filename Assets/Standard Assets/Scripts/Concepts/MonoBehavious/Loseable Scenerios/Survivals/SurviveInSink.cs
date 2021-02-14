@@ -15,16 +15,16 @@ namespace PlunderMouse
 			if (score >= surviveScoreToWin)
 			{
 				SceneManager.sceneLoaded += OnSceneLoaded;
-				GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition ("Cinematic");
+				LevelManager.Instance.LoadLevelWithTransition ("Cinematic");
 			}
 			else
-				GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition("Game Over");
+				LevelManager.Instance.LoadLevelWithTransition("Game Over");
 		}
 
 		public virtual void OnSceneLoaded (Scene scene = new Scene(), LoadSceneMode loadMode = LoadSceneMode.Single)
 		{
-			GameManager.GetSingleton<QuestManager>().CompleteQuest ("Defend against pirates!");
-			GameManager.GetSingleton<SaveAndLoadManager>().Save ();
+			QuestManager.Instance.CompleteQuest ("Defend against pirates!");
+			SaveAndLoadManager.Instance.Save ();
 			SceneManager.sceneLoaded -= OnSceneLoaded;
 		}
 	}

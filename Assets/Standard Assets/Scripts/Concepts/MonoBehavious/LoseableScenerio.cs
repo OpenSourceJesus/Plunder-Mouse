@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class LoseableScenerio : MonoBehaviour
+public class LoseableScenerio : SingletonMonoBehaviour<LoseableScenerio>
 {
 	public static List<LoseableScenerio> activeScenarios = new List<LoseableScenerio>();
 	
@@ -19,6 +19,6 @@ public class LoseableScenerio : MonoBehaviour
 	
 	public virtual void Lose ()
 	{
-		GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition("Game Over");
+		LevelManager.Instance.LoadLevelWithTransition("Game Over");
 	}
 }

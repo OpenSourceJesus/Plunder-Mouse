@@ -25,7 +25,7 @@ namespace PlunderMouse
 			float angle2 = Mathf.Atan((speedSqr - sqrt) / denominator) * Mathf.Rad2Deg;
 			spawner.forward = toPlayer;
 			spawner.localEulerAngles = spawner.localEulerAngles.SetX(Mathf.Max(angle1, angle2));
-			Bullet bullet = GameManager.GetSingleton<ObjectPool>().SpawnComponent<Bullet>(bulletPrefab, spawner.position + spawner.forward * positionOffset, spawner.rotation);
+			Bullet bullet = ObjectPool.Instance.SpawnComponent<Bullet>(bulletPrefab, spawner.position + spawner.forward * positionOffset, spawner.rotation);
 			bullet.moveSpeed = speed;
 			bullet.rigid.velocity = bullet.trs.forward * speed;
 			return new Bullet[] { bullet };

@@ -32,7 +32,7 @@ namespace PlunderMouse
 			float toPlayer = (PlayerObject.CurrentActive.trs.position - bullet.trs.position).GetFacingAngle();
 			for (float splitAngle = toPlayer - splitArc / 2 + splitOffset; splitAngle < toPlayer + splitArc / 2 + splitOffset; splitAngle += splitArc / splitNumber)
 				output = base.Split (bullet, VectorExtensions.FromFacingAngle(splitAngle), splitBulletPrefab, positionOffset);
-			// GameManager.GetSingleton<ObjectPool>().Despawn (bullet.prefabIndex, bullet.gameObject, bullet.trs);
+			// ObjectPool.Instance.Despawn (bullet.prefabIndex, bullet.gameObject, bullet.trs);
 			Destroy(bullet.gameObject);
 			return output;
 		}

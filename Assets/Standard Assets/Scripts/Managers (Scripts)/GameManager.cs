@@ -39,7 +39,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 		}
 	}
 	public static IUpdatable[] updatables = new IUpdatable[0];
-	public static Dictionary<Type, object> singletons = new Dictionary<Type, object>();
+	// public static Dictionary<Type, object> singletons = new Dictionary<Type, object>();
 	public float minTriggerInputValueToPress;
 	public static int framesSinceLevelLoaded;
 
@@ -65,8 +65,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 		Physics.Simulate(Time.deltaTime);
 		foreach (IUpdatable updatable in updatables)
 			updatable.DoUpdate ();
-		if (GetSingleton<ObjectPool>() != null && GetSingleton<ObjectPool>().enabled)
-			GetSingleton<ObjectPool>().DoUpdate ();
+		if (ObjectPool.Instance != null && ObjectPool.Instance.enabled)
+			ObjectPool.Instance.DoUpdate ();
 		InputSystem.Update ();
 		framesSinceLevelLoaded ++;
 	}

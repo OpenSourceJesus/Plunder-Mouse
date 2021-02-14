@@ -27,7 +27,7 @@ namespace PlunderMouse
 			Quaternion localRotation = spawner.localRotation;
 			spawner.forward = Quaternion.Euler(Vector3.up * spawner.localEulerAngles.y) * toPlayer.GetXZ();
 			spawner.localEulerAngles = spawner.localEulerAngles.SetX(Mathf.Max(angle1, angle2));
-			Bullet bullet = GameManager.GetSingleton<ObjectPool>().SpawnComponent<Bullet>(bulletPrefab, spawner.position + spawner.forward * positionOffset, spawner.rotation);
+			Bullet bullet = ObjectPool.Instance.SpawnComponent<Bullet>(bulletPrefab, spawner.position + spawner.forward * positionOffset, spawner.rotation);
 			spawner.localRotation = localRotation;
 			bullet.moveSpeed = speed;
 			bullet.rigid.velocity = bullet.trs.forward * speed;

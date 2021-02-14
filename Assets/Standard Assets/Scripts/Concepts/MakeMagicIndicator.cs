@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Extensions;
+using GameDevJourney;
 
 namespace PlunderMouse
 {
-	public class MakeMagicIndicator : MonoBehaviour, IUpdatable
+	public class MakeMagicIndicator : UpdateWhileEnabled
 	{
 		public bool PauseWhileUnfocused
 		{
@@ -18,29 +19,29 @@ namespace PlunderMouse
 		public MagicIndicator magicIndicatorPrefab;
 		public MagicIndicator magicIndicator;
 
-        public virtual void OnEnable ()
+        public override void OnEnable ()
         {
-			magicIndicator = GameManager.GetSingleton<ObjectPool>().SpawnComponent<MagicIndicator>(magicIndicatorPrefab, default(Vector3), default(Quaternion), GameManager.GetSingleton<MagicLocater>().trs);
+            base.OnEnable ();
+			magicIndicator = ObjectPool.Instance.SpawnComponent<MagicIndicator>(magicIndicatorPrefab, default(Vector3), default(Quaternion), MagicLocater.Instance.trs);
             magicIndicator.trs.localScale = magicIndicatorPrefab.trs.localScale;
 			magicIndicator.trs.localEulerAngles = Vector3.right * 90;
-            GameManager.updatables = GameManager.updatables.Add(this);
         }
 
-        public virtual void DoUpdate ()
+        public override void DoUpdate ()
         {
             magicIndicator.SetOrientation (trs);
 			magicIndicator.gameObject.SetActive(magicIndicator.trs.localPosition.sqrMagnitude <= .25f);
         }
 
-        public virtual void OnDisable ()
+        public override void OnDisable ()
         {
+            base.OnDisable ();
             if (magicIndicator != null)
             {
                 magicIndicator.gameObject.SetActive(false);
-                // GameManager.GetSingleton<ObjectPool>().Despawn (magicIndicator.prefabIndex, magicIndicator.gameObject, magicIndicator.trs);
+                // ObjectPool.Instance.Despawn (magicIndicator.prefabIndex, magicIndicator.gameObject, magicIndicator.trs);
                 Destroy(magicIndicator.gameObject);
             }
-            GameManager.updatables = GameManager.updatables.Remove(this);
         }
 	}
 }

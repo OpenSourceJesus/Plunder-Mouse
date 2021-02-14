@@ -34,7 +34,7 @@ namespace PlunderMouse
 			{
 				splitDirectionTrs.Rotate(splitArcRotaAxis.normalized * splitArcDegrees / splitNumber);
 				// bullets = base.Split (bullet, splitDirectionTrs.forward, splitBulletPrefab, positionOffset);
-				output[i] = GameManager.GetSingleton<ObjectPool>().SpawnComponent<Bullet>(splitBulletPrefab, bullet.trs.position + splitDirectionTrs.forward.normalized * positionOffset, splitDirectionTrs.rotation);
+				output[i] = ObjectPool.Instance.SpawnComponent<Bullet>(splitBulletPrefab, bullet.trs.position + splitDirectionTrs.forward.normalized * positionOffset, splitDirectionTrs.rotation);
 			}
 			return output;
 		}

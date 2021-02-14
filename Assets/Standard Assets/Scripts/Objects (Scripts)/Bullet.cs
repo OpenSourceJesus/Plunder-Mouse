@@ -16,7 +16,7 @@ namespace PlunderMouse
 		public virtual void OnEnable ()
 		{
 			dead = false;
-			rangedDespawn = GameManager.GetSingleton<ObjectPool>().RangeDespawn (prefabIndex, gameObject, trs, range);
+			rangedDespawn = ObjectPool.Instance.RangeDespawn (prefabIndex, gameObject, trs, range);
 			rigid.velocity = trs.forward * moveSpeed;
 		}
 		
@@ -28,9 +28,9 @@ namespace PlunderMouse
 			if (destructable.Hp == 0 && shooter != null)
 			{
 				SoundEffect.Settings deathResponseSettings = new SoundEffect.Settings();
-				deathResponseSettings.audioClip = GameManager.GetSingleton<AudioManager>().deathResponses[Random.Range(0, GameManager.GetSingleton<AudioManager>().deathResponses.Length)];
+				deathResponseSettings.audioClip = AudioManager.Instance.deathResponses[Random.Range(0, AudioManager.Instance.deathResponses.Length)];
 				deathResponseSettings.persistant = true;
-				SoundEffect soundEffect = GameManager.GetSingleton<AudioManager>().MakeSoundEffect (deathResponseSettings);
+				SoundEffect soundEffect = AudioManager.Instance.MakeSoundEffect (deathResponseSettings);
 				soundEffect.trs.SetParent(shooter);
 				soundEffect.trs.localPosition = Vector3.zero;
 				soundEffect.trs.localEulerAngles = Vector3.zero;
@@ -44,7 +44,7 @@ namespace PlunderMouse
 
 		public virtual void OnDestroy ()
 		{
-			GameManager.GetSingleton<ObjectPool>().CancelRangedDespawn (rangedDespawn);
+			ObjectPool.Instance.CancelRangedDespawn (rangedDespawn);
 		}
 	}
 }

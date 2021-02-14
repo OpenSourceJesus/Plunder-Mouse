@@ -6,6 +6,16 @@ namespace PlunderMouse
 {
 	public class PlayerMouse : PlayerObject
 	{
+		public new static PlayerMouse instance;
+		public new static PlayerMouse Instance
+		{
+			get
+			{
+				if (instance == null)
+					instance = FindObjectOfType<PlayerMouse>();
+				return instance;
+			}
+		}
 		[HideInInspector]
 		public Vector3 positionOffsetFromShip;
 		public CharacterController controller;
@@ -57,7 +67,7 @@ namespace PlunderMouse
 		{
 			if (!weapon.anim.isPlaying)
 			{
-				trs.forward = GameManager.GetSingleton<OVRCameraRig>().eyesTrs.forward.SetY(0);
+				trs.forward = OVRCameraRig.Instance.eyesTrs.forward.SetY(0);
 				previousRotation = trs.rotation;
 			}
 			else
@@ -69,13 +79,13 @@ namespace PlunderMouse
 			weapon.trs.parent.rotation = OVRCameraRig.CurrentHand.rotation;
 			if (attackTimer > attackRate && !weapon.anim.isPlaying)
 			{
-				if ((GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.leftButton.isPressed) || (GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.OculusRift && InputManager.leftTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress))
+				if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.leftButton.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && InputManager.leftTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress))
 				{
 					weapon.trs.parent.localScale = weapon.trs.parent.localScale.SetX(1);
 					attackTimer = 0;
 					Attack ();
 				}
-				else if ((GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.rightButton.isPressed) || (GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.OculusRift && InputManager.rightTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress))
+				else if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.rightButton.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && InputManager.rightTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress))
 				{
 					weapon.trs.parent.localScale = weapon.trs.parent.localScale.SetX(-1);
 					attackTimer = 0;
@@ -118,8 +128,8 @@ namespace PlunderMouse
 		
 		public virtual void HandleJump ()
 		{
-			bool hasJumpInput = GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.KeyboardAndMouse && Keyboard.current.leftShiftKey.isPressed;
-			hasJumpInput |= GameManager.GetSingleton<InputManager>().inputDevice == InputManager.InputDevice.OculusRift && (InputManager.leftTouchController.primaryButton.isPressed || InputManager.leftTouchController.secondaryButton.isPressed || InputManager.rightTouchController.primaryButton.isPressed || InputManager.rightTouchController.secondaryButton.isPressed);
+			bool hasJumpInput = InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Keyboard.current.leftShiftKey.isPressed;
+			hasJumpInput |= InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && (InputManager.leftTouchController.primaryButton.isPressed || InputManager.leftTouchController.secondaryButton.isPressed || InputManager.rightTouchController.primaryButton.isPressed || InputManager.rightTouchController.secondaryButton.isPressed);
 			if (canJump && hasJumpInput && Time.time - timeLastGrounded < jumpDuration)
 			{
 				if (controller.isGrounded)
@@ -162,20 +172,20 @@ namespace PlunderMouse
 		public virtual void BoardShip ()
 		{
 			Active = false;
-			GameManager.GetSingleton<PlayerShip>().switchIndicator.SetActive(false);
+			PlayerShip.Instance.switchIndicator.SetActive(false);
 			switchIndicator.SetActive(false);
 			switchIndicatorTrigger.gameObject.SetActive(false);
-			GameManager.GetSingleton<PlayerShip>().Active = true;
-			GameManager.GetSingleton<PlayerShip>().switchIndicatorTrigger.gameObject.SetActive(true);
-			trs.SetParent(GameManager.GetSingleton<PlayerShip>().trs);
+			PlayerShip.Instance.Active = true;
+			PlayerShip.Instance.switchIndicatorTrigger.gameObject.SetActive(true);
+			trs.SetParent(PlayerShip.Instance.trs);
 		}
 		
 		public virtual void DockShip ()
 		{
-			GameManager.GetSingleton<PlayerShip>().Active = false;
+			PlayerShip.Instance.Active = false;
 			switchIndicator.SetActive(false);
-			GameManager.GetSingleton<PlayerShip>().switchIndicator.SetActive(false);
-			GameManager.GetSingleton<PlayerShip>().switchIndicatorTrigger.gameObject.SetActive(false);
+			PlayerShip.Instance.switchIndicator.SetActive(false);
+			PlayerShip.Instance.switchIndicatorTrigger.gameObject.SetActive(false);
 			Active = true;
 			switchIndicatorTrigger.gameObject.SetActive(true);
 			trs.SetParent(null);

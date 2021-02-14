@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
+using GameDevJourney;
 
-public class GameOverScreen : MonoBehaviour
+public class GameOverScreen : SingletonMonoBehaviour<GameOverScreen>
 {
 	public virtual void GameOver ()
 	{
-		GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition (GameManager.GetSingleton<LevelManager>().mostRecentLevelName);
+		LevelManager.Instance.LoadLevelWithTransition (LevelManager.Instance.mostRecentLevelName);
 	}
 }

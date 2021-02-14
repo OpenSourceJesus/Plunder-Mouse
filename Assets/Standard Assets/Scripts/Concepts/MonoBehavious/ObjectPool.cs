@@ -4,10 +4,11 @@ using UnityEngine.SceneManagement;
 using System;
 using Extensions;
 using Object = UnityEngine.Object;
+using GameDevJourney;
 
 namespace PlunderMouse
 {
-	public class ObjectPool : MonoBehaviour
+	public class ObjectPool : SingletonMonoBehaviour<ObjectPool>
 	{
 		public bool preloadOnAwake = true;
 		public Transform trs;
@@ -19,8 +20,6 @@ namespace PlunderMouse
 		
 		public virtual void Awake ()
 		{
-			GameManager.singletons.Remove(GetType());
-			GameManager.singletons.Add(GetType(), this);
 			enabled = false;
 			gameObject.SetActive(false);
 			if (!preloadOnAwake)

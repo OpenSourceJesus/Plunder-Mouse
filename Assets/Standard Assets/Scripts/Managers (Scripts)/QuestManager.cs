@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public class QuestManager : MonoBehaviour, ISavableAndLoadable
+public class QuestManager : SingletonMonoBehaviour<QuestManager>, ISavableAndLoadable
 {
 #if UNITY_EDITOR
 	public bool update;
@@ -70,8 +70,8 @@ public class QuestManager : MonoBehaviour, ISavableAndLoadable
 		GameObject location = GameObject.Find(quest.locations[0]);
 		if (location != null)
 		{
-			GameManager.GetSingleton<ObjectiveGuider>().location = location.transform;
-			GameManager.GetSingleton<ObjectiveGuider>().gameObject.SetActive(true);
+			ObjectiveGuider.Instance.location = location.transform;
+			ObjectiveGuider.Instance.gameObject.SetActive(true);
 		}
 	}
 	

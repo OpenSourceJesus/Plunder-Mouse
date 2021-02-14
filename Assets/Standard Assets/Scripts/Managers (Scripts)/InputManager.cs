@@ -5,17 +5,18 @@ using System;
 using Unity.XR.Oculus.Input;
 using UnityEngine.InputSystem;
 using Extensions;
+using GameDevJourney;
 
 namespace PlunderMouse
 {
-	public class InputManager : MonoBehaviour
+	public class InputManager : SingletonMonoBehaviour<InputManager>
 	{
 		public InputDevice inputDevice;
 		public static InputDevice _InputDevice
 		{
 			get
 			{
-				return GameManager.GetSingleton<InputManager>().inputDevice;
+				return InputManager.Instance.inputDevice;
 			}
 		}
 		public InputSettings settings;
@@ -23,7 +24,7 @@ namespace PlunderMouse
 		{
 			get
 			{
-				return GameManager.GetSingleton<InputManager>().settings;
+				return InputManager.Instance.settings;
 			}
 		}
 		public static bool UsingGamepad

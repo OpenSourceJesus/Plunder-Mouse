@@ -162,8 +162,8 @@ namespace PlunderMouse
 				return;
 			float previousHp = hp;
 			hp = Mathf.Clamp(hp - amount, 0, MaxHp);
-			if (GameManager.GetSingleton<Survival>() != null)
-				GameManager.GetSingleton<Survival>().AddScore (previousHp - hp);
+			if (Survival.Instance != null)
+				Survival.Instance.AddScore (previousHp - hp);
 			anim.Stop (true);
 			if (!string.IsNullOrEmpty(hurtAnimName))
 				anim.Play (hurtAnimName);
@@ -248,12 +248,12 @@ namespace PlunderMouse
 			if (triggerOnDeath != null)
 				triggerOnDeath.Trigger ();
 			SoundEffect.Settings deathSoundSettings = new SoundEffect.Settings();
-			deathSoundSettings.audioClip = GameManager.GetSingleton<AudioManager>().deathSounds[Random.Range(0, GameManager.GetSingleton<AudioManager>().deathSounds.Length)];
+			deathSoundSettings.audioClip = AudioManager.Instance.deathSounds[Random.Range(0, AudioManager.Instance.deathSounds.Length)];
 			deathSoundSettings.speakerTrs = trs;
-			GameManager.GetSingleton<AudioManager>().MakeSoundEffect (deathSoundSettings);
+			AudioManager.Instance.MakeSoundEffect (deathSoundSettings);
 			makeMagicIndicator.enabled = false;
 			if (prefabIndex != -1)
-				GameManager.GetSingleton<ObjectPool>().DelayDespawn (prefabIndex, gameObject, trs, despawnDelay);
+				ObjectPool.Instance.DelayDespawn (prefabIndex, gameObject, trs, despawnDelay);
 			else
 				Destroy(gameObject, despawnDelay);
 			GameManager.updatables = GameManager.updatables.Remove(this);

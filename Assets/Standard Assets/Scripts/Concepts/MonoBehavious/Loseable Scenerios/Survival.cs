@@ -11,6 +11,16 @@ namespace PlunderMouse
 {
 	public class Survival : LoseableScenerio, IUpdatable
 	{
+		public new static Survival instance;
+		public new static Survival Instance
+		{
+			get
+			{
+				if (instance == null)
+					instance = FindObjectOfType<Survival>();
+				return instance;
+			}
+		}
 		public bool PauseWhileUnfocused
 		{
 			get
@@ -78,7 +88,7 @@ namespace PlunderMouse
 								spawnPosition.y = PlayerObject.CurrentActive.trs.position.y;
 							} while (Vector3.Distance(PlayerObject.CurrentActive.trs.position, spawnPosition) < minEnemySpawnDist);
 							spawnPosition.y = entry.enemyPrefab.trs.position.y;
-							Enemy enemy = GameManager.GetSingleton<ObjectPool>().SpawnComponent<Enemy>(entry.enemyPrefab, spawnPosition, Quaternion.identity);
+							Enemy enemy = ObjectPool.Instance.SpawnComponent<Enemy>(entry.enemyPrefab, spawnPosition, Quaternion.identity);
 							enemy.Awaken ();
 						}
 						entry.spawnAmount += entry.spawnAmountIncreaseRate;

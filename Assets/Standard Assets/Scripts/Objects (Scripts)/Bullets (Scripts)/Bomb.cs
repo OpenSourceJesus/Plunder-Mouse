@@ -35,8 +35,8 @@ namespace PlunderMouse
 		public virtual void Explode (params object[] args)
 		{
 			exploded = true;
-			GameManager.GetSingleton<ObjectPool>().SpawnComponent<Explosion>(explosionPrefab, trs.position);
-			// GameManager.GetSingleton<ObjectPool>().Despawn (prefabIndex, gameObject, trs);
+			ObjectPool.Instance.SpawnComponent<Explosion>(explosionPrefab, trs.position);
+			// ObjectPool.Instance.Despawn (prefabIndex, gameObject, trs);
 			Destroy(gameObject);
 		}
 

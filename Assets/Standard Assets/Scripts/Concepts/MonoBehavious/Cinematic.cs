@@ -6,18 +6,26 @@ using PlunderMouse;
 using UnityEngine.InputSystem;
 using Extensions;
 using Unity.XR.Oculus.Input;
+using GameDevJourney;
 
-public class Cinematic : MonoBehaviour, IUpdatable
+public class Cinematic : SingletonMonoBehaviour<Cinematic>, IUpdatable
 {
+	public bool PauseWhileUnfocused
+	{
+		get
+		{
+			return true;
+		}
+	}
 	public VideoPlayer video;
 	public string loadLevelOnDone;
 	public Animation[] skipNotifyAnims;
 	public float skipAfterTime;
+	public float playSkipNotifyAnimsInterval;
 	float skipTimer;
 	InputAction anyInputAction;
-	public float playSkipNotifyAnimsInterval;
 
-	public virtual void OnEnable ()
+	void OnEnable ()
 	{
 		anyInputAction = new InputAction(binding: "/*/<button>");
 		anyInputAction.performed += ShowSkipNotification;
@@ -25,7 +33,7 @@ public class Cinematic : MonoBehaviour, IUpdatable
 		GameManager.updatables = GameManager.updatables.Add(this);
 	}
 	
-	public virtual void DoUpdate ()
+	public void DoUpdate ()
 	{
 		if (InputManager.SkipCinematicInput)
 			skipTimer += Time.deltaTime;
@@ -34,23 +42,23 @@ public class Cinematic : MonoBehaviour, IUpdatable
 		if (Time.timeSinceLevelLoad > video.frameCount * (1f / video.frameRate) / video.playbackSpeed || skipTimer > skipAfterTime)
 		{
 			enabled = false;
-			GameManager.GetSingleton<LevelManager>().mostRecentLevelName = loadLevelOnDone;
-			GameManager.GetSingleton<LevelManager>().LoadLevelWithTransition (loadLevelOnDone);
+			LevelManager.Instance.mostRecentLevelName = loadLevelOnDone;
+			LevelManager.Instance.LoadLevelWithTransition (loadLevelOnDone);
 		}
 	}
 
-	public virtual void OnDisable ()
+	void OnDisable ()
 	{
+		GameManager.updatables = GameManager.updatables.Remove(this);
 		anyInputAction.Disable();
 		anyInputAction.performed -= ShowSkipNotification;
-		GameManager.updatables = GameManager.updatables.Remove(this);
 	}
 
-	public virtual void ShowSkipNotification (InputAction.CallbackContext context)
+	void ShowSkipNotification (InputAction.CallbackContext context)
 	{
 		InputManager.leftTouchController = (OculusTouchController) OculusTouchController.leftHand;
 		InputManager.rightTouchController = (OculusTouchController) OculusTouchController.rightHand;
-		if (context.control.device != InputManager.hmd || InputManager.leftTouchController.gripPressed.isPressed || InputManager.leftTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress || InputManager.leftTouchController.primaryButton.isPressed || InputManager.leftTouchController.secondaryButton.isPressed || InputManager.rightTouchController.gripPressed.isPressed || InputManager.rightTouchController.trigger.ReadValue() >= GameManager.GetSingleton<GameManager>().minTriggerInputValueToPress || InputManager.rightTouchController.primaryButton.isPressed || InputManager.rightTouchController.secondaryButton.isPressed)
+		if (context.control.device != InputManager.hmd || InputManager.leftTouchController.gripPressed.isPressed || InputManager.leftTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress || InputManager.leftTouchController.primaryButton.isPressed || InputManager.leftTouchController.secondaryButton.isPressed || InputManager.rightTouchController.gripPressed.isPressed || InputManager.rightTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress || InputManager.rightTouchController.primaryButton.isPressed || InputManager.rightTouchController.secondaryButton.isPressed)
 		{
 			bool isPlayingAnim = false;
 			foreach (Animation anim in skipNotifyAnims)
@@ -75,7 +83,7 @@ public class Cinematic : MonoBehaviour, IUpdatable
 		StartCoroutine(DelaySetAnyInputActionRoutine ());
 	}
 
-	public virtual IEnumerator DelaySetAnyInputActionRoutine ()
+	IEnumerator DelaySetAnyInputActionRoutine ()
 	{
 		yield return new WaitForSecondsRealtime(playSkipNotifyAnimsInterval);
 		anyInputAction = new InputAction(binding: "/*/<button>");

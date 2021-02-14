@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectiveGuider : MonoBehaviour
+public class ObjectiveGuider : SingletonMonoBehaviour<ObjectiveGuider>
 {
 	public Transform trs;
 	public Transform location;

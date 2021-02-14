@@ -33,7 +33,7 @@ public class SoundEffect : MonoBehaviour
 			get
 			{
 				if (volume == MathfExtensions.NULL_FLOAT)
-					return GameManager.GetSingleton<AudioManager>().soundEffectPrefab.audioSource.volume;
+					return AudioManager.Instance.soundEffectPrefab.audioSource.volume;
 				else
 					return volume;
 			}
@@ -48,7 +48,7 @@ public class SoundEffect : MonoBehaviour
 			get
 			{
 				if (maxDistance == MathfExtensions.NULL_FLOAT)
-					return GameManager.GetSingleton<AudioManager>().soundEffectPrefab.audioSource.maxDistance;
+					return AudioManager.Instance.soundEffectPrefab.audioSource.maxDistance;
 				else
 					return maxDistance;
 			}
@@ -63,7 +63,7 @@ public class SoundEffect : MonoBehaviour
 			get
 			{
 				if (minDistance == MathfExtensions.NULL_FLOAT)
-					return GameManager.GetSingleton<AudioManager>().soundEffectPrefab.audioSource.minDistance;
+					return AudioManager.Instance.soundEffectPrefab.audioSource.minDistance;
 				else
 					return minDistance;
 			}
@@ -83,7 +83,7 @@ public class SoundEffect : MonoBehaviour
 				else
 				{
 					if (position == VectorExtensions.NULL)
-						return GameManager.GetSingleton<AudioManager>().soundEffectPrefab.trs.position;
+						return AudioManager.Instance.soundEffectPrefab.trs.position;
 					else
 						return position;
 				}
@@ -103,7 +103,7 @@ public class SoundEffect : MonoBehaviour
 				else
 				{
 					if (rotation == QuaternionExtensions.NULL)
-						return GameManager.GetSingleton<AudioManager>().soundEffectPrefab.trs.rotation;
+						return AudioManager.Instance.soundEffectPrefab.trs.rotation;
 					else
 						return rotation;
 				}
