@@ -16,7 +16,7 @@ namespace PlunderMouse
 		{
 			get
 			{
-				return InputManager.Instance.inputDevice;
+				return Instance.inputDevice;
 			}
 		}
 		public InputSettings settings;
@@ -24,7 +24,7 @@ namespace PlunderMouse
 		{
 			get
 			{
-				return InputManager.Instance.settings;
+				return Instance.settings;
 			}
 		}
 		public static bool UsingGamepad
@@ -70,9 +70,9 @@ namespace PlunderMouse
 			get
 			{
 				if (UsingMouse)
-					return Mouse.current.position.ToVec2();
+					return Mouse.current.position.ReadValue();
 				else
-					return VectorExtensions.NULL;
+					return VectorExtensions.NULL3;
 			}
 		}
 		public Vector2 _MousePosition
@@ -99,26 +99,12 @@ namespace PlunderMouse
 				return SubmitInput;
 			}
 		}
-		public static bool ReplaceInput
-		{
-			get
-			{
-				return leftTouchController.trigger.ReadValue() > Settings.defaultDeadzoneMin || rightTouchController.trigger.ReadValue() > Settings.defaultDeadzoneMin;
-			}
-		}
-		public bool _ReplaceInput
-		{
-			get
-			{
-				return ReplaceInput;
-			}
-		}
 		public static Vector2 UIMovementInput
 		{
 			get
 			{
 				if (UsingGamepad)
-					return Vector2.ClampMagnitude(Gamepad.current.leftStick.ToVec2(), 1);
+					return Vector2.ClampMagnitude(Gamepad.current.leftStick.ReadValue(), 1);
 				else
 				{
 					int x = 0;
@@ -164,9 +150,165 @@ namespace PlunderMouse
 				return SkipCinematicInput;
 			}
 		}
-		public static OculusHMD hmd;
-		public static OculusTouchController leftTouchController;
-		public static OculusTouchController rightTouchController;
+		public static Vector2 MoveInput
+		{
+			get
+			{
+				Vector2 output = new Vector2();
+				if (LeftTouchController != null)
+					output = LeftTouchController.thumbstick.ReadValue();
+				if (RightTouchController != null)
+					output += RightTouchController.thumbstick.ReadValue();
+				return Vector2.ClampMagnitude(output, 1);
+			}
+		}
+		public Vector2 _MoveInput
+		{
+			get
+			{
+				return MoveInput;
+			}
+		}
+		public static bool SetOrientationInput
+		{
+			get
+			{
+				if (_InputDevice == InputDevice.KeyboardAndMouse)
+					return Keyboard.current.spaceKey.isPressed;
+				else if (_InputDevice == InputDevice.OculusRift)
+					return LeftTouchController.gripPressed.isPressed || RightTouchController.gripPressed.isPressed;
+			}
+		}
+		public bool _SetOrientationInput
+		{
+			get
+			{
+				return SetOrientationInput;
+			}
+		}
+		public static Vector3 HeadPosition
+		{
+			get
+			{
+				if (Hmd != null)
+					return Hmd.devicePosition.ReadValue();
+				else
+					return VectorExtensions.NULL3;
+			}
+		}
+		public Vector3 _HeadPosition
+		{
+			get
+			{
+				return HeadPosition;
+			}
+		}
+		public static Quaternion HeadRotation
+		{
+			get
+			{
+				if (Hmd != null)
+					return Hmd.deviceRotation.ReadValue();
+				else
+					return QuaternionExtensions.NULL;
+			}
+		}
+		public Quaternion _HeadRotation
+		{
+			get
+			{
+				return HeadRotation;
+			}
+		}
+		public static Vector3 LeftHandPosition
+		{
+			get
+			{
+				if (LeftTouchController != null)
+					return LeftTouchController.devicePosition.ReadValue();
+				else
+					return VectorExtensions.NULL3;
+			}
+		}
+		public Vector3 _LeftHandPosition
+		{
+			get
+			{
+				return LeftHandPosition;
+			}
+		}
+		public static Quaternion LeftHandRotation
+		{
+			get
+			{
+				if (LeftTouchController != null)
+					return LeftTouchController.deviceRotation.ReadValue();
+				else
+					return QuaternionExtensions.NULL;
+			}
+		}
+		public Quaternion _LeftHandRotation
+		{
+			get
+			{
+				return LeftHandRotation;
+			}
+		}
+		public static Vector3 RightHandPosition
+		{
+			get
+			{
+				if (RightTouchController != null)
+					return RightTouchController.devicePosition.ReadValue();
+				else
+					return VectorExtensions.NULL3;
+			}
+		}
+		public Vector3 _RightHandPosition
+		{
+			get
+			{
+				return RightHandPosition;
+			}
+		}
+		public static Quaternion RightHandRotation
+		{
+			get
+			{
+				if (RightTouchController != null)
+					return RightTouchController.deviceRotation.ReadValue();
+				else
+					return QuaternionExtensions.NULL;
+			}
+		}
+		public Quaternion _RightHandRotation
+		{
+			get
+			{
+				return RightHandRotation;
+			}
+		}
+		public static OculusHMD Hmd
+		{
+			get
+			{
+				return InputSystem.GetDevice<OculusHMD>();
+			}
+		}
+		public static OculusTouchController LeftTouchController
+		{
+			get
+			{
+				return (OculusTouchController) OculusTouchController.leftHand;
+			}
+		}
+		public static OculusTouchController RightTouchController
+		{
+			get
+			{
+				return (OculusTouchController) OculusTouchController.rightHand;
+			}
+		}
 		
 		// IEnumerator Start ()
 		// {

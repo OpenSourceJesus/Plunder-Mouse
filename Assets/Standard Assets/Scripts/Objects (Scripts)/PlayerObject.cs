@@ -116,17 +116,8 @@ public class PlayerObject : SingletonMonoBehaviour<PlayerObject>, IDestructable,
 	
 	public virtual Vector3 GetMoveInput ()
 	{
-		Vector3 moveInput = new Vector3();
-		if (InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse)
-			moveInput = InputManager.GetAxis2D(Keyboard.current.dKey, Keyboard.current.aKey, Keyboard.current.wKey, Keyboard.current.sKey);
-		else if (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift)
-		{
-			InputManager.leftTouchController = (OculusTouchController) OculusTouchController.leftHand;
-			InputManager.rightTouchController = (OculusTouchController) OculusTouchController.rightHand;
-			moveInput = InputManager.leftTouchController.thumbstick.ToVec2() + InputManager.rightTouchController.thumbstick.ToVec2();
-		}
-		if (moveInput != Vector3.zero)
-			moveInput = moveInput.XYToXZ();
+		Vector3 moveInput = InputManager.MoveInput;
+		moveInput = moveInput.XYToXZ();
 		moveInput = Vector3.ClampMagnitude(moveInput, 1);
 		moveInput = Quaternion.Euler(Vector3.up * OVRCameraRig.Instance.eyesTrs.eulerAngles.y) * moveInput;
 		moveInput.y = 0;

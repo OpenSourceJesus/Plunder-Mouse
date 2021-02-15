@@ -54,7 +54,7 @@ public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 	{
 		if (PlayerObject.CurrentActive != null)
 			trs.position = PlayerObject.CurrentActive.trs.position + (rota * positionOffset);
-		Vector2 rotaInput = Mouse.current.delta.ToVec2().FlipY() * lookRate * Time.deltaTime;
+		Vector2 rotaInput = Mouse.current.delta.ReadValue().FlipY() * lookRate * Time.deltaTime;
 		if (rotaInput != Vector2.zero)
 		{
 			trackingSpaceTrs.RotateAround(trackingSpaceTrs.position, trackingSpaceTrs.right, rotaInput.y);
@@ -62,7 +62,7 @@ public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 		}
 		if (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift)
 			UpdateAnchors ();
-		if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Keyboard.current.spaceKey.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && (InputManager.leftTouchController.gripPressed.isPressed || InputManager.rightTouchController.gripPressed.isPressed)))
+		if (InputManager.SetOrientationInput)
 		{
 			if (!wasPreviouslySettingOrienation)
 			{
@@ -81,15 +81,12 @@ public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 
 	void UpdateAnchors ()
 	{
-		InputManager.hmd = InputSystem.GetDevice<OculusHMD>();
-		eyesTrs.localPosition = InputManager.hmd.devicePosition.ToVec3();
-		eyesTrs.localRotation = InputManager.hmd.deviceRotation.ToQuat();
-		InputManager.leftTouchController = (OculusTouchController) OculusTouchController.leftHand;
-		InputManager.rightTouchController = (OculusTouchController) OculusTouchController.rightHand;
-		leftHandTrs.localRotation = InputManager.leftTouchController.deviceRotation.ToQuat();
-		rightHandTrs.localRotation = InputManager.rightTouchController.deviceRotation.ToQuat();
-		leftHandTrs.localPosition = InputManager.leftTouchController.devicePosition.ToVec3();
-		rightHandTrs.localPosition = InputManager.rightTouchController.devicePosition.ToVec3();
+		eyesTrs.localPosition = InputManager.HeadPosition;
+		eyesTrs.localRotation = InputManager.HeadRotation;
+		leftHandTrs.localRotation = InputManager.LeftHandRotation;
+		rightHandTrs.localRotation = InputManager.RightHandRotation;
+		leftHandTrs.localPosition = InputManager.LeftHandPosition;
+		rightHandTrs.localPosition = InputManager.RightHandPosition;
 	}
 	
 	void SetOrientation ()

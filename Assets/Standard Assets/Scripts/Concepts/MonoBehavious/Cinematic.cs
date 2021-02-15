@@ -56,9 +56,7 @@ public class Cinematic : SingletonMonoBehaviour<Cinematic>, IUpdatable
 
 	void ShowSkipNotification (InputAction.CallbackContext context)
 	{
-		InputManager.leftTouchController = (OculusTouchController) OculusTouchController.leftHand;
-		InputManager.rightTouchController = (OculusTouchController) OculusTouchController.rightHand;
-		if (context.control.device != InputManager.hmd || InputManager.leftTouchController.gripPressed.isPressed || InputManager.leftTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress || InputManager.leftTouchController.primaryButton.isPressed || InputManager.leftTouchController.secondaryButton.isPressed || InputManager.rightTouchController.gripPressed.isPressed || InputManager.rightTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress || InputManager.rightTouchController.primaryButton.isPressed || InputManager.rightTouchController.secondaryButton.isPressed)
+		if (context.control.device != InputManager.Hmd)
 		{
 			bool isPlayingAnim = false;
 			foreach (Animation anim in skipNotifyAnims)

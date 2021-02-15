@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PlunderMouse;
-using UnityEngine.InputSystem.Controls;
 
 namespace Extensions
 {
 	public static class VectorExtensions
 	{
-		public static Vector3 NULL = new Vector3(MathfExtensions.NULL_FLOAT, MathfExtensions.NULL_FLOAT, MathfExtensions.NULL_FLOAT);
+		public static Vector3 NULL3 = new Vector3(MathfExtensions.NULL_FLOAT, MathfExtensions.NULL_FLOAT, MathfExtensions.NULL_FLOAT);
 		public static Vector3 INFINITE = new Vector3(Mathf.Infinity, Mathf.Infinity, Mathf.Infinity);
 		
 		public static Vector3 Snap (this Vector3 v, Vector3 snap)
@@ -386,16 +385,6 @@ namespace Extensions
 				currentAngle.degrees += snap.degrees;
 			} while (currentAngle.degrees < 360);
 			return output;
-		}
-
-		public static Vector2 ToVec2 (this Vector2Control control)
-		{
-			return new Vector2(control.x.ReadValue(), control.y.ReadValue());
-		}
-
-		public static Vector3 ToVec3 (this Vector3Control control)
-		{
-			return new Vector3(control.x.ReadValue(), control.y.ReadValue(), control.z.ReadValue());
 		}
 
 		public static Vector2 FlipY (this Vector2 v)

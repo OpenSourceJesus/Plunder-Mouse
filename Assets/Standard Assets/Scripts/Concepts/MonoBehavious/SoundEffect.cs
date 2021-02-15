@@ -73,7 +73,7 @@ public class SoundEffect : MonoBehaviour
 			}
 		}
 		public Transform speakerTrs;
-		Vector3 position = VectorExtensions.NULL;
+		Vector3 position = VectorExtensions.NULL3;
 		public Vector3 Position
 		{
 			get
@@ -82,7 +82,7 @@ public class SoundEffect : MonoBehaviour
 					return speakerTrs.position;
 				else
 				{
-					if (position == VectorExtensions.NULL)
+					if (position == VectorExtensions.NULL3)
 						return AudioManager.Instance.soundEffectPrefab.trs.position;
 					else
 						return position;

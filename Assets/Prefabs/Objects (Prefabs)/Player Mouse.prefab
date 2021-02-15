@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 2852565114121299477}
   - component: {fileID: 6209282439229664540}
   - component: {fileID: 6172394015253992695}
+  - component: {fileID: 237802712}
   m_Layer: 8
   m_Name: Player Mouse
   m_TagString: Untagged
@@ -201,7 +202,7 @@ Transform:
   m_GameObject: {fileID: 6237177199763067102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.65, z: 0}
-  m_LocalScale: {x: 1.3333334, y: 1.333333, z: 1.333333}
+  m_LocalScale: {x: 1.3333341, y: 1.333333, z: 1.3333337}
   m_Children:
   - {fileID: 1602379347070769469}
   - {fileID: 9178384502361350881}
@@ -314,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   massMultiplier: 0.2
-  renderer: {fileID: 0}
+  renderer: {fileID: 495839230035086492}
   rigid: {fileID: 6218027504058070916}
 --- !u!136 &6172394015253992695
 CapsuleCollider:
@@ -330,6 +331,14 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &237802712
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6237177199763067102}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &6854076757938525127
 GameObject:
   m_ObjectHideFlags: 0
