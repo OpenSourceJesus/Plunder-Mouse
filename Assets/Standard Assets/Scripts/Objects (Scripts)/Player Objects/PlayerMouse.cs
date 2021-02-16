@@ -79,13 +79,13 @@ namespace PlunderMouse
 			weapon.trs.parent.rotation = OVRCameraRig.CurrentHand.rotation;
 			if (attackTimer > attackRate && !weapon.anim.isPlaying)
 			{
-				if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.leftButton.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && InputManager.leftTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress))
+				if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.leftButton.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && InputManager.LeftTouchController.trigger.ReadValue() >= InputManager.Settings.defaultDeadzoneMin))
 				{
 					weapon.trs.parent.localScale = weapon.trs.parent.localScale.SetX(1);
 					attackTimer = 0;
 					Attack ();
 				}
-				else if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.rightButton.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && InputManager.rightTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress))
+				else if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.rightButton.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && InputManager.RightTouchController.trigger.ReadValue() >= InputManager.Settings.defaultDeadzoneMin))
 				{
 					weapon.trs.parent.localScale = weapon.trs.parent.localScale.SetX(-1);
 					attackTimer = 0;
@@ -128,9 +128,7 @@ namespace PlunderMouse
 		
 		public virtual void HandleJump ()
 		{
-			bool hasJumpInput = InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Keyboard.current.leftShiftKey.isPressed;
-			hasJumpInput |= InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && (InputManager.leftTouchController.primaryButton.isPressed || InputManager.leftTouchController.secondaryButton.isPressed || InputManager.rightTouchController.primaryButton.isPressed || InputManager.rightTouchController.secondaryButton.isPressed);
-			if (canJump && hasJumpInput && Time.time - timeLastGrounded < jumpDuration)
+			if (canJump && InputManager.JumpInput && Time.time - timeLastGrounded < jumpDuration)
 			{
 				if (controller.isGrounded)
 					yVel = 0;
@@ -156,7 +154,7 @@ namespace PlunderMouse
 		public virtual void OnCollisionEnter (Collision coll)
 		{
 			Bullet hitBullet = coll.gameObject.GetComponent<Bullet>();
-			if (hitBullet != null && (Vector3.Angle(coll.GetContact(0).normal, Vector3.up) > maxHitNormalAngleToJumpOnBulletWithImpunity || !(Keyboard.current.leftShiftKey.isPressed || InputManager.leftTouchController.primaryButton.isPressed || InputManager.leftTouchController.secondaryButton.isPressed || InputManager.rightTouchController.primaryButton.isPressed || InputManager.rightTouchController.secondaryButton.isPressed)))
+			if (hitBullet != null && (Vector3.Angle(coll.GetContact(0).normal, Vector3.up) > maxHitNormalAngleToJumpOnBulletWithImpunity || !InputManager.JumpInput))
 			{
 				TakeDamage (hitBullet.damage, hitBullet);
 				Destroy(hitBullet.gameObject);

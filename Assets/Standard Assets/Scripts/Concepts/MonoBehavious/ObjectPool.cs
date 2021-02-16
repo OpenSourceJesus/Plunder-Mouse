@@ -18,8 +18,9 @@ namespace PlunderMouse
 		public List<SpawnedEntry> spawnedEntries = new List<SpawnedEntry>();
 		public static bool isSpawning;
 		
-		public virtual void Awake ()
+		public override void Awake ()
 		{
+			base.Awake ();
 			instance = this;
 			enabled = false;
 			gameObject.SetActive(false);

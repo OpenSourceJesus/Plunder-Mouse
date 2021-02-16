@@ -8,7 +8,7 @@ public class LookAtCamera : UpdateWhileEnabled, IUpdatable
 {
 	public Transform trs;
 	
-	public virtual void DoUpdate ()
+	public override void DoUpdate ()
 	{
 		trs.forward = OVRCameraRig.Instance.eyesTrs.position - trs.position;
 	}

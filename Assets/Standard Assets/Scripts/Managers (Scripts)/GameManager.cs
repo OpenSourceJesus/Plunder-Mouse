@@ -39,8 +39,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 		}
 	}
 	public static IUpdatable[] updatables = new IUpdatable[0];
-	// public static Dictionary<Type, object> singletons = new Dictionary<Type, object>();
-	public float minTriggerInputValueToPress;
 	public static int framesSinceLevelLoaded;
 
 	public override void Awake ()
@@ -70,80 +68,6 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 		InputSystem.Update ();
 		framesSinceLevelLoaded ++;
 	}
-
-	// public static T GetSingleton<T> ()
-	// {
-	// 	if (!singletons.ContainsKey(typeof(T)))
-	// 		return GetSingleton<T>(FindObjectsOfType<Object>());
-	// 	else
-	// 	{
-	// 		if (singletons[typeof(T)] == null || singletons[typeof(T)].Equals(default(T)))
-	// 		{
-	// 			T singleton = GetSingleton<T>(FindObjectsOfType<Object>());
-	// 			singletons[typeof(T)] = singleton;
-	// 			return singleton;
-	// 		}
-	// 		else
-	// 			return (T) singletons[typeof(T)];
-	// 	}
-	// }
-
-	// public static T GetSingleton<T> (Object[] objects)
-	// {
-	// 	if (typeof(T).IsSubclassOf(typeof(Object)))
-	// 	{
-	// 		foreach (Object obj in objects)
-	// 		{
-	// 			if (obj is T)
-	// 			{
-	// 				singletons.Remove(typeof(T));
-	// 				singletons.Add(typeof(T), obj);
-	// 				break;
-	// 			}
-	// 		}
-	// 	}
-	// 	if (singletons.ContainsKey(typeof(T)))
-	// 		return (T) singletons[typeof(T)];
-	// 	else
-	// 		return default(T);
-	// }
-
-	// public static T GetSingletonIncludingAssets<T> ()
-	// {
-	// 	if (!singletons.ContainsKey(typeof(T)))
-	// 		return GetSingletonIncludingAssets<T>(FindObjectsOfTypeIncludingAssets(typeof(T)));
-	// 	else
-	// 	{
-	// 		if (singletons[typeof(T)] == null || singletons[typeof(T)].Equals(default(T)))
-	// 		{
-	// 			T singleton = GetSingleton<T>(FindObjectsOfTypeIncludingAssets(typeof(T)));
-	// 			singletons[typeof(T)] = singleton;
-	// 			return singleton;
-	// 		}
-	// 		else
-	// 			return (T) singletons[typeof(T)];
-	// 	}
-	// }
-
-	// public static T GetSingletonIncludingAssets<T> (Object[] objects)
-	// {
-	// 	if (typeof(T).IsSubclassOf(typeof(Object)))
-	// 	{
-	// 		foreach (Object obj in objects)
-	// 		{
-	// 			if (obj is T)
-	// 			{
-	// 				singletons.Remove(typeof(T));
-	// 				singletons.Add(typeof(T), obj);
-	// 				break;
-	// 			}
-	// 		}
-	// 	}
-	// 	if (singletons.ContainsKey(typeof(T)))
-	// 		return (T) singletons[typeof(T)];
-	// 	else
-	// 		return default(T);
-	// }
 	
 	public virtual void Quit ()
 	{
@@ -155,7 +79,7 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
 		print(obj);
 	}
 
-	// public virtual void OnApplicationQuit ()
+	// void OnApplicationQuit ()
 	// {
 	// 	PlayerPrefs.DeleteAll();
 	// }

@@ -8,13 +8,6 @@ namespace PlunderMouse
 {
 	public class MakeMagicIndicator : UpdateWhileEnabled
 	{
-		public bool PauseWhileUnfocused
-		{
-			get
-			{
-				return true;
-			}
-		}
         public Transform trs;
 		public MagicIndicator magicIndicatorPrefab;
 		public MagicIndicator magicIndicator;

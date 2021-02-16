@@ -54,7 +54,7 @@ public class Quest : UnlockableNode
 		}
 		assetPath = QuestData.instance.questsFolderPath + "/" + name + ".prefab";
 		if (questPrefab == null || questPrefab.name != name)
-			questPrefab = PrefabUtility.CreatePrefab(assetPath, gameObject).GetComponent<Quest>();
+			questPrefab = PrefabUtility.SaveAsPrefabAsset(gameObject, assetPath).GetComponent<Quest>();
 	}
 #endif
 	

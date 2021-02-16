@@ -132,15 +132,10 @@ namespace PlunderMouse
 		{
 			get
 			{
-				bool output = false;
 				if (_InputDevice != InputDevice.KeyboardAndMouse)
-				{
-					rightTouchController = (OculusTouchController) OculusTouchController.rightHand;
-					output = rightTouchController.primaryButton.isPressed;
-				}
-				if (UsingKeyboard)
-					output |= Keyboard.current.spaceKey.isPressed;
-				return output;
+					return RightTouchController.primaryButton.isPressed;
+				else
+					return Keyboard.current.spaceKey.isPressed;
 			}
 		}
 		public bool _SkipCinematicInput
@@ -177,6 +172,8 @@ namespace PlunderMouse
 					return Keyboard.current.spaceKey.isPressed;
 				else if (_InputDevice == InputDevice.OculusRift)
 					return LeftTouchController.gripPressed.isPressed || RightTouchController.gripPressed.isPressed;
+				else
+					return false;
 			}
 		}
 		public bool _SetOrientationInput
@@ -184,6 +181,25 @@ namespace PlunderMouse
 			get
 			{
 				return SetOrientationInput;
+			}
+		}
+		public static bool JumpInput
+		{
+			get
+			{
+				if (_InputDevice == InputDevice.KeyboardAndMouse)
+					return Keyboard.current.leftShiftKey.isPressed;
+				else if (_InputDevice == InputDevice.OculusRift)
+					return LeftTouchController.primaryButton.isPressed || LeftTouchController.secondaryButton.isPressed || RightTouchController.primaryButton.isPressed || RightTouchController.secondaryButton.isPressed;
+				else
+					return false;
+			}
+		}
+		public bool _JumpInput
+		{
+			get
+			{
+				return JumpInput;
 			}
 		}
 		public static Vector3 HeadPosition

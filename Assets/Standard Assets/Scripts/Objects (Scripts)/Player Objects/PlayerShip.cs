@@ -49,7 +49,7 @@ public class PlayerShip : PlayerObject
 				Attack ();
 			}
 		}
-		else if (InputManager.leftTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress || InputManager.rightTouchController.trigger.ReadValue() >= GameManager.Instance.minTriggerInputValueToPress)
+		else if (InputManager.LeftTouchController.trigger.ReadValue() >= InputManager.Settings.defaultDeadzoneMin || InputManager.RightTouchController.trigger.ReadValue() >= InputManager.Settings.defaultDeadzoneMin)
 			Attack ();
 	}
 	
