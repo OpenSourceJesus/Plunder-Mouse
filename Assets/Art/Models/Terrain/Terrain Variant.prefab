@@ -103,14 +103,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 3604064352995006563, guid: 6131f9f1fd8cfa3449cf6ebbcfea557a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3604064352995006563, guid: 6131f9f1fd8cfa3449cf6ebbcfea557a, type: 3}
-      propertyPath: near clip plane
-      value: 0.01
-      objectReference: {fileID: 0}
     - target: {fileID: 3629961080726427658, guid: 6131f9f1fd8cfa3449cf6ebbcfea557a, type: 3}
       propertyPath: m_Mesh
       value: 

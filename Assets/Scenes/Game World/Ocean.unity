@@ -864,10 +864,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 8924172352629648763, guid: 7d718a33228fce047a889c347c3c2bad, type: 3}
-      propertyPath: near clip plane
-      value: 0.001
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d718a33228fce047a889c347c3c2bad, type: 3}
 --- !u!1001 &621800153
