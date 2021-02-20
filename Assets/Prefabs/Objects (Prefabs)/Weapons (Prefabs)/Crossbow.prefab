@@ -83,7 +83,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2aaa2a9a1427c3649aba736eb02c2f0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
   attackAnim: {fileID: 0}
   damage: 1
   spawnTrs: {fileID: 643972698467055411}
-  bulletPattern: {fileID: 11400000, guid: 27c65e5a3e70c1c49b2a7be339133402, type: 2}
+  bulletPattern: {fileID: 0}
   bulletPrefab: {fileID: 114148495533847358, guid: b5f35a5c2d829f243bd58f3c95219a48, type: 3}
   reloadTimer:
     duration: 0.33333334
@@ -469,7 +469,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 2aaa2a9a1427c3649aba736eb02c2f0b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
