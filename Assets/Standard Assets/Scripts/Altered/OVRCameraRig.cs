@@ -56,16 +56,17 @@ public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 
 	public void DoUpdate ()
 	{
-		if (PlayerObject.CurrentActive != null)
-			trs.position = PlayerObject.CurrentActive.trs.position + (rota * positionOffset);
-		Vector2 rotaInput = Mouse.current.delta.ReadValue().FlipY() * lookRate * Time.deltaTime;
-		if (rotaInput != Vector2.zero)
-		{
-			trackingSpaceTrs.RotateAround(trackingSpaceTrs.position, trackingSpaceTrs.right, rotaInput.y);
-			trackingSpaceTrs.RotateAround(trackingSpaceTrs.position, Vector3.up, rotaInput.x);
-		}
 		if (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift)
 			UpdateAnchors ();
+		else
+		{
+			Vector2 rotaInput = Mouse.current.delta.ReadValue().FlipY() * lookRate * Time.deltaTime;
+			if (rotaInput != Vector2.zero)
+			{
+				trackingSpaceTrs.RotateAround(trackingSpaceTrs.position, trackingSpaceTrs.right, rotaInput.y);
+				trackingSpaceTrs.RotateAround(trackingSpaceTrs.position, Vector3.up, rotaInput.x);
+			}
+		}
 		setOrientationInput = InputManager.SetOrientationInput;
 		if (setOrientationInput && !previousSetOrientationInput)
 			SetOrientation ();
@@ -79,6 +80,15 @@ public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 
 	void UpdateAnchors ()
 	{
+		if (PlayerObject.CurrentActive != null)
+		{
+			RaycastHit hit;
+			if (Physics.Raycast(PlayerObject.CurrentActive.trs.position, trs.position - PlayerObject.CurrentActive.trs.position, out hit, cameraDistance, whatICollideWith))
+				positionOffset = positionOffset.normalized * hit.distance;
+			else
+				positionOffset = positionOffset.normalized * cameraDistance;
+			trs.position = PlayerObject.CurrentActive.trs.position + (rota * positionOffset);
+		}
 		eyesTrs.localPosition = InputManager.HeadPosition;
 		eyesTrs.localRotation = InputManager.HeadRotation;
 		leftHandTrs.localRotation = InputManager.LeftHandRotation;
@@ -89,12 +99,7 @@ public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 	
 	void SetOrientation ()
 	{
-		rota = Quaternion.LookRotation(eyesTrs.forward.GetXZ().SetY(eyesTrs.forward.y), Vector3.up);
-		RaycastHit hit;
-		if (Physics.Raycast(PlayerObject.CurrentActive.trs.position, rota * positionOffset, out hit, cameraDistance, whatICollideWith))
-			positionOffset = positionOffset.normalized * hit.distance;
-		else
-			positionOffset = positionOffset.normalized * cameraDistance;
+		rota = eyesTrs.rotation;
 		trackingSpaceTrs.forward = eyesTrs.forward.GetXZ();
 	}
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645251, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -571,11 +571,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6234891588360196262, guid: fb373877fca12d246b250ee8ae8b4b19, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 6234891588360196262, guid: fb373877fca12d246b250ee8ae8b4b19, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 6234891588360196262, guid: fb373877fca12d246b250ee8ae8b4b19, type: 3}
       propertyPath: m_LocalRotation.w
@@ -591,18 +591,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6234891588360196262, guid: fb373877fca12d246b250ee8ae8b4b19, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6234891588360196262, guid: fb373877fca12d246b250ee8ae8b4b19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6234891588360196262, guid: fb373877fca12d246b250ee8ae8b4b19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6234891588360196262, guid: fb373877fca12d246b250ee8ae8b4b19, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6237177199763067102, guid: fb373877fca12d246b250ee8ae8b4b19, type: 3}
@@ -2288,7 +2276,7 @@ BoxCollider:
   m_GameObject: {fileID: 1981737696}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 10, y: 4000, z: 10}
   m_Center: {x: 0, y: -2000, z: 0}

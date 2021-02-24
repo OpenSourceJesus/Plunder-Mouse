@@ -72,7 +72,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 21
+    m_Bits: 213
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -383,7 +383,7 @@ MonoBehaviour:
   lookRate: 100
   whatICollideWith:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 129
   cameraDistance: 0
 --- !u!1 &5394432660664837272
 GameObject:
