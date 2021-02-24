@@ -35,15 +35,19 @@ public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 			currentHand = value;
 		}
 	}
+	public float lookRate;
+	public LayerMask whatICollideWith;
+	[HideInInspector]
+	public float cameraDistance;
 	Vector3 positionOffset;
 	Quaternion rota;
-	Vector3 previousTrackingSpaceForward;
-	public float lookRate;
-	bool wasPreviouslySettingOrienation;
+	bool setOrientationInput;
+	bool previousSetOrientationInput;
 	
 	void Start ()
 	{
 		CurrentHand = rightHandTrs;
+		cameraDistance = trs.localPosition.magnitude;
 		positionOffset = trs.localPosition;
 		trs.SetParent(null);
 		SetOrientation ();
@@ -62,16 +66,10 @@ public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 		}
 		if (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift)
 			UpdateAnchors ();
-		if (InputManager.SetOrientationInput)
-		{
-			if (!wasPreviouslySettingOrienation)
-			{
-				wasPreviouslySettingOrienation = true;
-				SetOrientation ();
-			}
-		}
-		else
-			wasPreviouslySettingOrienation = false;
+		setOrientationInput = InputManager.SetOrientationInput;
+		if (setOrientationInput && !previousSetOrientationInput)
+			SetOrientation ();
+		previousSetOrientationInput = setOrientationInput;
 	}
 
 	void OnDestroy ()
@@ -92,6 +90,11 @@ public class OVRCameraRig : SingletonMonoBehaviour<OVRCameraRig>, IUpdatable
 	void SetOrientation ()
 	{
 		rota = Quaternion.LookRotation(eyesTrs.forward.GetXZ().SetY(eyesTrs.forward.y), Vector3.up);
+		RaycastHit hit;
+		if (Physics.Raycast(PlayerObject.CurrentActive.trs.position, rota * positionOffset, out hit, cameraDistance, whatICollideWith))
+			positionOffset = positionOffset.normalized * hit.distance;
+		else
+			positionOffset = positionOffset.normalized * cameraDistance;
 		trackingSpaceTrs.forward = eyesTrs.forward.GetXZ();
 	}
 }
