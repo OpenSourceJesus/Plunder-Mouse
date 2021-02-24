@@ -60,7 +60,9 @@ namespace PlunderMouse
 			HandleBoarding ();
 			HandleGravity ();
 			HandleJump ();
-			controller.Move(move * Time.deltaTime);
+			if (controller.enabled)
+				controller.Move(move * Time.deltaTime);
+			// controller.SimpleMove(move);
 		}
 
 		public virtual void HandleFacing ()

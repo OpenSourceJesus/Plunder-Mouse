@@ -281,7 +281,7 @@ MonoBehaviour:
   gravity: 40
   maxHitNormalAngleToJumpOnBulletWithImpunity: 0
   multiplyRigidMoveSpeed: 0.5
-  groundCheckDistance: Infinity
+  groundCheckDistance: 0.1
   whatICollideWith:
     serializedVersion: 2
     m_Bits: 129
@@ -356,7 +356,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6237177199763067102}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f691b23692cffbb4f984b376ee899380, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -688,10 +688,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9178384502361350881}
     m_Modifications:
-    - target: {fileID: 288899882960741500, guid: 7782b00599aa9504196674d9d3b541b9, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4926181687081917386, guid: 7782b00599aa9504196674d9d3b541b9, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -735,10 +731,6 @@ PrefabInstance:
     - target: {fileID: 4926181687081917386, guid: 7782b00599aa9504196674d9d3b541b9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7049474434332096593, guid: 7782b00599aa9504196674d9d3b541b9, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8280464757532523083, guid: 7782b00599aa9504196674d9d3b541b9, type: 3}
       propertyPath: m_Name

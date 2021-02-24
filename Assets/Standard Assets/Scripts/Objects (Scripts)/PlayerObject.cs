@@ -118,7 +118,6 @@ public class PlayerObject : SingletonMonoBehaviour<PlayerObject>, IDestructable,
 	{
 		Vector3 moveInput = InputManager.MoveInput;
 		moveInput = moveInput.XYToXZ();
-		moveInput = Vector3.ClampMagnitude(moveInput, 1);
 		moveInput = Quaternion.Euler(Vector3.up * OVRCameraRig.Instance.eyesTrs.eulerAngles.y) * moveInput;
 		moveInput.y = 0;
 		return moveInput;
