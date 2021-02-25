@@ -25,13 +25,16 @@ namespace PlunderMouse
 		public float maxHitNormalAngleToJumpOnBulletWithImpunity;
 		public float multiplyRigidMoveSpeed;
 		public float groundCheckDistance;
+		public LayerMask whatICollideWith;
+		public Transform groundCheckPoint;
+		public float slideRate;
+		// public bool isSwimming;
+		bool isGrounded;
 		float timeLastGrounded;
 		float yVel;
 		Vector3 previousPosition;
-		// public bool isSwimming;
 		Quaternion previousRotation;
 		bool canJump;
-		public LayerMask whatICollideWith;
 		
 		public override void Start ()
 		{
@@ -49,7 +52,9 @@ namespace PlunderMouse
 			if (dead || !active)
 				return;
 			move = Vector3.zero;
-			if (controller.isGrounded)
+			// isGrounded = Physics.Raycast(groundCheckPoint.position, Vector3.down, groundCheckDistance, whatICollideWith);
+			isGrounded = controller.isGrounded;
+			if (isGrounded)
 			{
 				timeLastGrounded = Time.time;
 				canJump = true;
@@ -62,7 +67,6 @@ namespace PlunderMouse
 			HandleJump ();
 			if (controller.enabled)
 				controller.Move(move * Time.deltaTime);
-			// controller.SimpleMove(move);
 		}
 
 		public virtual void HandleFacing ()
@@ -81,13 +85,13 @@ namespace PlunderMouse
 			weapon.trs.parent.rotation = OVRCameraRig.CurrentHand.rotation;
 			if (attackTimer > attackRate && !weapon.anim.isPlaying)
 			{
-				if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.leftButton.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && InputManager.LeftTouchController.trigger.ReadValue() >= InputManager.Settings.defaultDeadzoneMin))
+				if (InputManager.RightAttackInput)
 				{
 					weapon.trs.parent.localScale = weapon.trs.parent.localScale.SetX(1);
 					attackTimer = 0;
 					Attack ();
 				}
-				else if ((InputManager.Instance.inputDevice == InputManager.InputDevice.KeyboardAndMouse && Mouse.current.rightButton.isPressed) || (InputManager.Instance.inputDevice == InputManager.InputDevice.OculusRift && InputManager.RightTouchController.trigger.ReadValue() >= InputManager.Settings.defaultDeadzoneMin))
+				else if (InputManager.LeftAttackInput)
 				{
 					weapon.trs.parent.localScale = weapon.trs.parent.localScale.SetX(-1);
 					attackTimer = 0;
@@ -98,7 +102,7 @@ namespace PlunderMouse
 		
 		public virtual void HandleGravity ()
 		{
-			if (controller.enabled && !controller.isGrounded)
+			if (controller.enabled && !isGrounded)
 			{
 				yVel -= gravity * Time.deltaTime;
 				move += Vector3.up * yVel;
@@ -124,15 +128,17 @@ namespace PlunderMouse
 			move += GetMoveInput();
 			if (controller.enabled)
 				move *= moveSpeed;
-			else
+			else //if (isSwimming)
 				rigid.velocity = (move * moveSpeed * multiplyRigidMoveSpeed).SetY(rigid.velocity.y);
+			// else
+			// 	rigid.velocity += Vector3.down * Physics.gravity.y * Time.deltaTime;
 		}
 		
 		public virtual void HandleJump ()
 		{
 			if (canJump && InputManager.JumpInput && Time.time - timeLastGrounded < jumpDuration)
 			{
-				if (controller.isGrounded)
+				if (isGrounded)
 					yVel = 0;
 				Jump ();
 			}
@@ -194,7 +200,7 @@ namespace PlunderMouse
 		void HandleSlopes ()
 		{
 			RaycastHit hit;
-			if (Physics.Raycast(controller.bounds.center + Vector3.down * controller.bounds.extents.y, Vector3.down, out hit, groundCheckDistance, whatICollideWith))
+			if (Physics.Raycast(groundCheckPoint.position, Vector3.down, out hit, groundCheckDistance, whatICollideWith))
 			{
 				float slopeAngle = Vector3.Angle(hit.normal, Vector3.up);
 				if (slopeAngle <= controller.slopeLimit)
@@ -202,17 +208,17 @@ namespace PlunderMouse
 					controller.enabled = true;
 					rigid.useGravity = false;
 					rigid.velocity = Vector2.zero;
-					return;
 				}
-				// else
-				// 	return;
+				else
+				{
+					if (controller.enabled)
+						rigid.velocity = controller.velocity;
+					controller.enabled = false;
+					rigid.useGravity = true;
+					// rigid.velocity += Vector3.up * Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * Physics.gravity.y * Time.deltaTime;
+					rigid.velocity += Vector3.down * Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * slideRate * Time.deltaTime;
+				}
 			}
-			else
-				return;
-			if (controller.enabled)
-				rigid.velocity = controller.velocity;
-			controller.enabled = false;
-			rigid.useGravity = true;
 		}
 	}
 }

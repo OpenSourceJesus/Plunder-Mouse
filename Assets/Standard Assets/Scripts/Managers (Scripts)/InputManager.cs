@@ -202,6 +202,96 @@ namespace PlunderMouse
 				return JumpInput;
 			}
 		}
+		public static bool LeftAttackInput
+		{
+			get
+			{
+				if (_InputDevice == InputDevice.KeyboardAndMouse)
+					return Mouse.current.leftButton.isPressed;
+				else
+					return LeftTriggerInput;
+			}
+		}
+		public bool _LeftAttackInput
+		{
+			get
+			{
+				return LeftAttackInput;
+			}
+		}
+		public static bool RightAttackInput
+		{
+			get
+			{
+				if (_InputDevice == InputDevice.KeyboardAndMouse)
+					return Mouse.current.rightButton.isPressed;
+				else
+					return RightTriggerInput;
+			}
+		}
+		public bool _RightAttackInput
+		{
+			get
+			{
+				return RightAttackInput;
+			}
+		}
+		public static bool LeftGripInput
+		{
+			get
+			{
+				return LeftTouchController != null && LeftTouchController.gripPressed.isPressed;
+			}
+		}
+		public bool _LeftGripInput
+		{
+			get
+			{
+				return LeftGripInput;
+			}
+		}
+		public static bool RightGripInput
+		{
+			get
+			{
+				return RightTouchController != null && RightTouchController.gripPressed.isPressed;
+			}
+		}
+		public bool _RightGripInput
+		{
+			get
+			{
+				return RightGripInput;
+			}
+		}
+		public static bool LeftTriggerInput
+		{
+			get
+			{
+				return LeftTouchController != null && LeftTouchController.triggerPressed.isPressed;
+			}
+		}
+		public bool _LeftTriggerInput
+		{
+			get
+			{
+				return LeftTriggerInput;
+			}
+		}
+		public static bool RightTriggerInput
+		{
+			get
+			{
+				return RightTouchController != null && RightTouchController.triggerPressed.isPressed;
+			}
+		}
+		public bool _RightTriggerInput
+		{
+			get
+			{
+				return RightTriggerInput;
+			}
+		}
 		public static Vector3 HeadPosition
 		{
 			get

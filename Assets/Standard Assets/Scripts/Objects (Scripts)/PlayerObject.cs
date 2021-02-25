@@ -106,7 +106,7 @@ public class PlayerObject : SingletonMonoBehaviour<PlayerObject>, IDestructable,
 	public virtual void TakeDamage (float amount, Hazard source)
 	{
 		hp = Mathf.Clamp(hp - amount, 0, MaxHp);
-		hpText.text = "" + hp;
+		hpText.text = "Health: " + hp;
 		if (hp == 0)
 		{
 			dead = true;
