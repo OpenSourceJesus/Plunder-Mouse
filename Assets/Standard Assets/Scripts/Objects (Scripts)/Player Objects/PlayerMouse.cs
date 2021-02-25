@@ -52,7 +52,6 @@ namespace PlunderMouse
 			if (dead || !active)
 				return;
 			move = Vector3.zero;
-			// isGrounded = Physics.Raycast(groundCheckPoint.position, Vector3.down, groundCheckDistance, whatICollideWith);
 			isGrounded = controller.isGrounded;
 			if (isGrounded)
 			{
@@ -62,14 +61,14 @@ namespace PlunderMouse
 			HandleFacing ();
 			Move ();
 			HandleAttacking ();
-			HandleBoarding ();
+			// HandleBoarding ();
 			HandleGravity ();
 			HandleJump ();
 			if (controller.enabled)
 				controller.Move(move * Time.deltaTime);
 		}
 
-		public virtual void HandleFacing ()
+		void HandleFacing ()
 		{
 			if (!weapon.anim.isPlaying)
 			{
@@ -80,7 +79,7 @@ namespace PlunderMouse
 				trs.rotation = previousRotation;
 		}
 		
-		public virtual void HandleAttacking ()
+		void HandleAttacking ()
 		{
 			weapon.trs.parent.rotation = OVRCameraRig.CurrentHand.rotation;
 			if (attackTimer > attackRate && !weapon.anim.isPlaying)
@@ -100,7 +99,7 @@ namespace PlunderMouse
 			}
 		}
 		
-		public virtual void HandleGravity ()
+		void HandleGravity ()
 		{
 			if (controller.enabled && !isGrounded)
 			{
@@ -109,16 +108,16 @@ namespace PlunderMouse
 			}
 		}
 		
-		public virtual void HandleBoarding ()
-		{
-			canSwitch = switchIndicatorTrigger.collidersInside.Count > 0;
-			if (switchIndicator != null)
-				switchIndicator.SetActive(canSwitch);
-			// if (canSwitch && (OVRInput.GetDown(OVRInput.Button.Three) || InputManager.inputter.GetButtonDown("Interact")))
-				// BoardShip ();
-		}
+		// void HandleBoarding ()
+		// {
+		// 	canSwitch = switchIndicatorTrigger.collidersInside.Count > 0;
+		// 	if (switchIndicator != null)
+		// 		switchIndicator.SetActive(canSwitch);
+		// 	// if (canSwitch && (OVRInput.GetDown(OVRInput.Button.Three) || InputManager.inputter.GetButtonDown("Interact")))
+		// 		// BoardShip ();
+		// }
 		
-		public virtual void Attack ()
+		void Attack ()
 		{
 			weapon.Attack ();
 		}
@@ -128,13 +127,11 @@ namespace PlunderMouse
 			move += GetMoveInput();
 			if (controller.enabled)
 				move *= moveSpeed;
-			else //if (isSwimming)
+			else
 				rigid.velocity = (move * moveSpeed * multiplyRigidMoveSpeed).SetY(rigid.velocity.y);
-			// else
-			// 	rigid.velocity += Vector3.down * Physics.gravity.y * Time.deltaTime;
 		}
 		
-		public virtual void HandleJump ()
+		void HandleJump ()
 		{
 			if (canJump && InputManager.JumpInput && Time.time - timeLastGrounded < jumpDuration)
 			{
@@ -159,7 +156,7 @@ namespace PlunderMouse
 			}
 		}
 
-		public virtual void OnCollisionEnter (Collision coll)
+		void OnCollisionEnter (Collision coll)
 		{
 			Bullet hitBullet = coll.gameObject.GetComponent<Bullet>();
 			if (hitBullet != null && (Vector3.Angle(coll.GetContact(0).normal, Vector3.up) > maxHitNormalAngleToJumpOnBulletWithImpunity || !InputManager.JumpInput))
@@ -173,28 +170,6 @@ namespace PlunderMouse
 		void OnCollisionStay (Collision coll)
 		{
 			HandleSlopes ();
-		}
-		
-		public virtual void BoardShip ()
-		{
-			Active = false;
-			PlayerShip.Instance.switchIndicator.SetActive(false);
-			switchIndicator.SetActive(false);
-			switchIndicatorTrigger.gameObject.SetActive(false);
-			PlayerShip.Instance.Active = true;
-			PlayerShip.Instance.switchIndicatorTrigger.gameObject.SetActive(true);
-			trs.SetParent(PlayerShip.Instance.trs);
-		}
-		
-		public virtual void DockShip ()
-		{
-			PlayerShip.Instance.Active = false;
-			switchIndicator.SetActive(false);
-			PlayerShip.Instance.switchIndicator.SetActive(false);
-			PlayerShip.Instance.switchIndicatorTrigger.gameObject.SetActive(false);
-			Active = true;
-			switchIndicatorTrigger.gameObject.SetActive(true);
-			trs.SetParent(null);
 		}
 
 		void HandleSlopes ()
@@ -215,10 +190,31 @@ namespace PlunderMouse
 						rigid.velocity = controller.velocity;
 					controller.enabled = false;
 					rigid.useGravity = true;
-					// rigid.velocity += Vector3.up * Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * Physics.gravity.y * Time.deltaTime;
 					rigid.velocity += Vector3.down * Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * slideRate * Time.deltaTime;
 				}
 			}
 		}
+		
+		// void BoardShip ()
+		// {
+		// 	Active = false;
+		// 	PlayerShip.Instance.switchIndicator.SetActive(false);
+		// 	switchIndicator.SetActive(false);
+		// 	switchIndicatorTrigger.gameObject.SetActive(false);
+		// 	PlayerShip.Instance.Active = true;
+		// 	PlayerShip.Instance.switchIndicatorTrigger.gameObject.SetActive(true);
+		// 	trs.SetParent(PlayerShip.Instance.trs);
+		// }
+		
+		// void DockShip ()
+		// {
+		// 	PlayerShip.Instance.Active = false;
+		// 	switchIndicator.SetActive(false);
+		// 	PlayerShip.Instance.switchIndicator.SetActive(false);
+		// 	PlayerShip.Instance.switchIndicatorTrigger.gameObject.SetActive(false);
+		// 	Active = true;
+		// 	switchIndicatorTrigger.gameObject.SetActive(true);
+		// 	trs.SetParent(null);
+		// }
 	}
 }
